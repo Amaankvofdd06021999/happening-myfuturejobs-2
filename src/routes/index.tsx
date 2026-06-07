@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Search, MapPin, Sparkles, Briefcase, Building2, GraduationCap, Calendar, Award, ArrowRight, CheckCircle2, BarChart3, Users, ShieldCheck, Brain, Zap, Globe, TrendingUp, FileText, Play, Lock, Rocket, Target, ChevronRight, BookOpen, Layers, LineChart, UserCheck, MessageSquare, Settings, Database, Shield, Smartphone, Cloud, Mail, Phone, MapPinned, Facebook, Twitter, Linkedin, Instagram, Youtube, ExternalLink } from "lucide-react";
+import { Search, MapPin, Sparkles, Briefcase, Building2, GraduationCap, Calendar, Award, ArrowRight, CheckCircle2, BarChart3, Users, ShieldCheck, Brain, Zap, Globe, TrendingUp, FileText, Play, Lock, Rocket, Target, ChevronRight, BookOpen, Layers, LineChart, UserCheck, MessageSquare, Settings, Database, Shield, Smartphone, Cloud, Mail, Phone, MapPinned, Facebook, Twitter, Linkedin, Instagram, Youtube, ExternalLink, Clock, Star, UserCircle } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { FloatingChatbot } from "@/components/FloatingChatbot";
@@ -691,13 +691,15 @@ function Home() {
 
                 <div className="mt-10 space-y-5">
                   {[
-                    { icon: "⏱️", metric: "Time to hire", before: "45 days", after: "12 days", improvement: "-73%", color: "orange" },
-                    { icon: "💼", metric: "Cost per hire", before: "RM 8,500", after: "RM 2,100", improvement: "-75%", color: "orange" },
-                    { icon: "⭐", metric: "Quality of hire", before: "62%", after: "89%", improvement: "+44%", color: "orange" },
-                    { icon: "👤", metric: "Candidate experience", before: "3.2/5", after: "4.7/5", improvement: "+47%", color: "orange" }
+                    { icon: <Clock className="h-5 w-5" />, metric: "Time to hire", before: "45 days", after: "12 days", improvement: "-73%", color: "orange" },
+                    { icon: <Briefcase className="h-5 w-5" />, metric: "Cost per hire", before: "RM 8,500", after: "RM 2,100", improvement: "-75%", color: "orange" },
+                    { icon: <Star className="h-5 w-5" />, metric: "Quality of hire", before: "62%", after: "89%", improvement: "+44%", color: "orange" },
+                    { icon: <UserCircle className="h-5 w-5" />, metric: "Candidate experience", before: "3.2/5", after: "4.7/5", improvement: "+47%", color: "orange" }
                   ].map((stat) => (
                     <div key={stat.metric} className="flex items-center gap-4">
-                      <span className="text-[24px]">{stat.icon}</span>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-orange-200 bg-orange-50 text-orange-600">
+                        {stat.icon}
+                      </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <span className="text-[15px] font-600">{stat.metric}</span>

@@ -9,7 +9,8 @@
       "Bash(curl -I http://localhost:8080/)",
       "Bash(git add -A)",
       "Bash(git commit -m \"Add FloatingChatbot to all dashboard pages\n\n- Added FloatingChatbot import to AppShell component\n- Chatbot now appears on jobseeker, employer, and officer dashboards\n- Maintains context-aware functionality across all pages\")",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(git commit -m \"Replace emoji icons with line icons in ROI section\n\n- Changed from emoji to Lucide React line icons\n- Added Clock, Briefcase, Star, and UserCircle icons\n- Icons now have consistent orange-themed circular background\n- Better visual consistency with the rest of the design\")"
     ],
     "deny": [],
     "ask": []
