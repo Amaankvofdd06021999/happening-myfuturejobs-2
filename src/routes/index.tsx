@@ -326,17 +326,86 @@ function Home() {
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { company: "Petronas Digital", vacancies: 45, logo: "🏢", featured: ["Software Engineer", "Data Analyst"], hiring: "Immediate", microsites: true, analytics: "82% match rate" },
-            { company: "Maybank", vacancies: 38, logo: "🏦", featured: ["Branch Manager", "Risk Analyst"], hiring: "Q1 2026", microsites: true, analytics: "75% match rate" },
-            { company: "AirAsia", vacancies: 67, logo: "✈️", featured: ["Cabin Crew", "Ground Staff"], hiring: "Ongoing", microsites: false, analytics: "91% match rate" },
-            { company: "Grab Malaysia", vacancies: 29, logo: "🚗", featured: ["Operations Lead", "Product Manager"], hiring: "Immediate", microsites: true, analytics: "88% match rate" },
-            { company: "Shopee", vacancies: 51, logo: "🛍️", featured: ["Marketing Exec", "Logistics Coordinator"], hiring: "Monthly", microsites: true, analytics: "79% match rate" },
-            { company: "TNB", vacancies: 33, logo: "⚡", featured: ["Electrical Engineer", "Project Manager"], hiring: "Q2 2026", microsites: false, analytics: "71% match rate" },
+            {
+              company: "Petronas Digital",
+              vacancies: 45,
+              logoUrl: "https://logo.clearbit.com/petronas.com",
+              bgColor: "bg-teal-50",
+              featured: ["Software Engineer", "Data Analyst"],
+              hiring: "Immediate",
+              microsites: true,
+              analytics: "82% match rate"
+            },
+            {
+              company: "Maybank",
+              vacancies: 38,
+              logoUrl: "https://logo.clearbit.com/maybank.com",
+              bgColor: "bg-yellow-50",
+              featured: ["Branch Manager", "Risk Analyst"],
+              hiring: "Q1 2026",
+              microsites: true,
+              analytics: "75% match rate"
+            },
+            {
+              company: "AirAsia",
+              vacancies: 67,
+              logoUrl: "https://logo.clearbit.com/airasia.com",
+              bgColor: "bg-red-50",
+              featured: ["Cabin Crew", "Ground Staff"],
+              hiring: "Ongoing",
+              microsites: false,
+              analytics: "91% match rate"
+            },
+            {
+              company: "Grab Malaysia",
+              vacancies: 29,
+              logoUrl: "https://logo.clearbit.com/grab.com",
+              bgColor: "bg-green-50",
+              featured: ["Operations Lead", "Product Manager"],
+              hiring: "Immediate",
+              microsites: true,
+              analytics: "88% match rate"
+            },
+            {
+              company: "Shopee",
+              vacancies: 51,
+              logoUrl: "https://logo.clearbit.com/shopee.com",
+              bgColor: "bg-orange-50",
+              featured: ["Marketing Exec", "Logistics Coordinator"],
+              hiring: "Monthly",
+              microsites: true,
+              analytics: "79% match rate"
+            },
+            {
+              company: "TNB",
+              vacancies: 33,
+              logoUrl: "https://logo.clearbit.com/tnb.com.my",
+              bgColor: "bg-blue-50",
+              featured: ["Electrical Engineer", "Project Manager"],
+              hiring: "Q2 2026",
+              microsites: false,
+              analytics: "71% match rate"
+            },
           ].map((emp) => (
             <div key={emp.company} className="rounded-[14px] border border-border bg-card p-5 hover:shadow-hero transition-shadow">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-[32px]">{emp.logo}</span>
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-[10px] ${emp.bgColor} p-2`}>
+                    <img
+                      src={emp.logoUrl}
+                      alt={`${emp.company} logo`}
+                      className="h-full w-full object-contain"
+                      onError={(e) => {
+                        // Fallback to first letter if logo fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `<span class="text-xl font-bold text-gray-700">${emp.company.charAt(0)}</span>`;
+                        }
+                      }}
+                    />
+                  </div>
                   <div>
                     <h3 className="text-[16px] font-600">{emp.company}</h3>
                     <p className="text-[12px] text-emphasis font-600">{emp.vacancies} open positions</p>
