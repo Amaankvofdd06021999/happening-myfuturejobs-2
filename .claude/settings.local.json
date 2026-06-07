@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun install)",
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(npm install framer-motion zustand @tanstack/react-table)",
+      "Bash(npm install framer-motion zustand @tanstack/react-table --force)",
+      "Bash(curl -I http://localhost:8080/)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

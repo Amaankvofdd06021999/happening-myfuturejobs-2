@@ -1,0 +1,232 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-content {
+  animation: marquee 40s linear infinite;
+  display: flex;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Interactive element animations */
+@keyframes subtle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 121, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 121, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 121, 255, 0);
+  }
+}
+
+@custom-variant dark (&:is([data-theme="dark"] *), &[data-theme="dark"]);
+
+@theme inline {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-inset: var(--inset);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-emphasis: var(--emphasis);
+  --color-emphasis-foreground: var(--emphasis-foreground);
+  --color-emphasis-soft: var(--emphasis-soft);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-secondary: var(--inset);
+  --color-secondary-foreground: var(--foreground);
+  --color-accent: var(--primary-soft);
+  --color-accent-foreground: var(--primary);
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: #ffffff;
+  --color-sidebar: var(--card);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--primary-soft);
+  --color-sidebar-accent-foreground: var(--primary);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--primary);
+}
+
+:root,
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #1f1f15;
+  --surface: #fafafa;
+  --inset: #f6f6f6;
+  --card: #ffffff;
+  --card-foreground: #1f1f15;
+  --muted: #f6f6f6;
+  --muted-foreground: #6b6b66;
+  --border: #ececec;
+  --primary: #2279ff;
+  --primary-foreground: #ffffff;
+  --primary-soft: #eaf2ff;
+  --emphasis: #ee562d;
+  --emphasis-foreground: #ffffff;
+  --emphasis-soft: #fdece5;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --grad-blue: linear-gradient(135deg, #2279ff 0%, #5aa0ff 100%);
+  --grad-orange: linear-gradient(135deg, #ee562d 0%, #ff7a4f 100%);
+  --shadow-sm: 0 1px 2px rgba(31, 31, 21, 0.04), 0 1px 3px rgba(31, 31, 21, 0.04);
+  --shadow-md: 0 4px 16px rgba(31, 31, 21, 0.06), 0 2px 6px rgba(31, 31, 21, 0.04);
+}
+
+[data-theme="dark"] {
+  --background: #0a0a0b;
+  --foreground: #f5f5f7;
+  --surface: #111113;
+  --inset: #18181b;
+  --card: #1a1a1e;
+  --card-foreground: #f5f5f7;
+  --muted: #18181b;
+  --muted-foreground: #9ca3af;
+  --border: #27272a;
+  --primary: #4a8fff;
+  --primary-foreground: #ffffff;
+  --primary-soft: rgba(74, 143, 255, 0.15);
+  --emphasis: #ff6838;
+  --emphasis-foreground: #ffffff;
+  --emphasis-soft: rgba(255, 104, 56, 0.15);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --grad-blue: linear-gradient(135deg, #4a8fff 0%, #6ba3ff 100%);
+  --grad-orange: linear-gradient(135deg, #ff6838 0%, #ff8a5b 100%);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  html, body { background: var(--background); color: var(--foreground); }
+  body {
+    font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.025em; font-weight: 600; }
+  .num, .tabular { font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
+}
+
+@utility grad-blue { background-image: var(--grad-blue); }
+@utility grad-orange { background-image: var(--grad-orange); }
+@utility shadow-card { box-shadow: var(--shadow-sm); }
+@utility shadow-hero { box-shadow: var(--shadow-md); }
+
+@layer components {
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Enhanced dark mode styles for better contrast */
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  /* Better card contrast in dark mode */
+  [data-theme="dark"] .shadow-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme="dark"] .shadow-hero {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Improve badge visibility in dark mode */
+  [data-theme="dark"] .bg-primary-soft {
+    background-color: rgba(74, 143, 255, 0.18);
+  }
+
+  [data-theme="dark"] .bg-emphasis-soft {
+    background-color: rgba(255, 104, 56, 0.18);
+  }
+
+  [data-theme="dark"] .bg-success-soft {
+    background-color: rgba(34, 197, 94, 0.15);
+  }
+
+  [data-theme="dark"] .bg-warning-soft {
+    background-color: rgba(245, 158, 11, 0.15);
+  }
+
+  [data-theme="dark"] .bg-error-soft,
+  [data-theme="dark"] .bg-danger-soft {
+    background-color: rgba(239, 68, 68, 0.15);
+  }
+
+  /* Better hover states */
+  [data-theme="dark"] .hover\:border-primary:hover {
+    border-color: #5a9fff;
+  }
+
+  [data-theme="dark"] .hover\:bg-card:hover {
+    background-color: #202024;
+  }
+
+  /* Improve input contrast */
+  [data-theme="dark"] input,
+  [data-theme="dark"] textarea,
+  [data-theme="dark"] select {
+    background-color: #18181b;
+    border-color: #2a2a2e;
+  }
+
+  [data-theme="dark"] input:focus,
+  [data-theme="dark"] textarea:focus,
+  [data-theme="dark"] select:focus {
+    background-color: #1a1a1e;
+    border-color: #4a8fff;
+  }
+
+  /* Better text contrast */
+  [data-theme="dark"] .text-muted-foreground {
+    color: #a8adb8;
+  }
+
+  /* Gradient adjustments for dark mode */
+  [data-theme="dark"] .grad-blue {
+    background: linear-gradient(135deg, #5a9fff 0%, #80b4ff 100%);
+  }
+
+  [data-theme="dark"] .grad-orange {
+    background: linear-gradient(135deg, #ff7848 0%, #ffa06b 100%);
+  }
+}
