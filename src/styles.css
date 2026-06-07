@@ -23,6 +23,101 @@
   50% { transform: translateY(-2px); }
 }
 
+/* Scroll reveal animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scroll animation classes */
+.scroll-animate {
+  opacity: 0;
+}
+
+.scroll-animate.in-view {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.in-view {
+  animation-name: fade-in-up;
+}
+
+.fade-in-down.in-view {
+  animation-name: fade-in-down;
+}
+
+.fade-in-left.in-view {
+  animation-name: fade-in-left;
+}
+
+.fade-in-right.in-view {
+  animation-name: fade-in-right;
+}
+
+.scale-in.in-view {
+  animation-name: scale-in;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
 @keyframes pulse-ring {
   0% {
     box-shadow: 0 0 0 0 rgba(34, 121, 255, 0.4);

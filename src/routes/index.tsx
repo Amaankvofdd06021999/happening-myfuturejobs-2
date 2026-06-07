@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Search, MapPin, Sparkles, Briefcase, Building2, GraduationCap, Calendar, Award, ArrowRight, CheckCircle2, BarChart3, Users, ShieldCheck, Brain, Zap, Globe, TrendingUp, FileText, Play, Lock, Rocket, Target, ChevronRight, BookOpen, Layers, LineChart, UserCheck, MessageSquare, Settings, Database, Shield, Smartphone, Cloud, Mail, Phone, MapPinned, Facebook, Twitter, Linkedin, Instagram, Youtube, ExternalLink, Clock, Star, UserCircle } from "lucide-react";
 import { Logo } from "@/components/Logo";
@@ -32,6 +32,31 @@ function Home() {
   const [jobSearch, setJobSearch] = useState("");
   const [locationSearch, setLocationSearch] = useState("");
   const [language, setLanguage] = useState("English");
+
+  // Setup scroll animations on mount
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px 0px -50px 0px",
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-animate class
+    const elements = document.querySelectorAll(".scroll-animate");
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
 
   // Handler for job search
   const handleJobSearch = () => {
@@ -162,19 +187,19 @@ function Home() {
       <section className="relative overflow-hidden">
         <div className="mx-auto grid max-w-[1280px] gap-10 px-4 py-14 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:px-8 lg:py-20">
           <div>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-[12px] font-600">
+            <div className="scroll-animate fade-in-down mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-[12px] font-600">
               <span className="h-1.5 w-1.5 rounded-full bg-emphasis" />
               National employment portal · Powered by PERKESO
             </div>
-            <h1 className="text-[44px] font-700 leading-[1.05] tracking-tight lg:text-[60px]">
+            <h1 className="scroll-animate fade-in-up delay-100 text-[44px] font-700 leading-[1.05] tracking-tight lg:text-[60px]">
               Find work that <span className="text-emphasis">fits you</span>, not just any job.
             </h1>
-            <p className="mt-5 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">
+            <p className="scroll-animate fade-in-up delay-200 mt-5 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">
               Smart matching, AI career coaching, verified Malaysian employers, and pathways into training — all in one place.
             </p>
 
             {/* ENHANCED SEARCH WITH AI */}
-            <div id="jobs" className="mt-7 rounded-[14px] border border-border bg-card p-2 shadow-hero">
+            <div id="jobs" className="scroll-animate fade-in-up delay-300 mt-7 rounded-[14px] border border-border bg-card p-2 shadow-hero">
               <div className="grid gap-2 md:grid-cols-[1.5fr_1fr_auto]">
                 <label className="relative flex items-center gap-2 rounded-[10px] bg-inset px-3">
                   <Search className="h-4 w-4 text-muted-foreground" />
@@ -254,7 +279,7 @@ function Home() {
           </div>
 
           {/* Hero image */}
-          <div className="relative">
+          <div className="relative scroll-animate fade-in-left delay-200">
             <div className="overflow-hidden rounded-[18px] border border-border shadow-hero">
               <img src={heroImage} alt="Malaysian professional working" className="aspect-[5/4] w-full object-cover" />
             </div>
@@ -297,7 +322,7 @@ function Home() {
       {/* ROLE SELECTION (Job Seeker, Employer, Officer) */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3 scroll-animate fade-in-up">
             {[
               { icon: <Briefcase className="h-5 w-5"/>, t: "I'm looking for a job", d: "Build your profile, get AI-matched roles, and track every application.", to: "/signin", emp: false, cta: "Find jobs" },
               { icon: <Building2 className="h-5 w-5"/>, t: "I'm hiring talent", d: "Post vacancies, screen with AI fit-match, and book interviews faster.", to: "/signin", emp: true, cta: "Post a job" },
@@ -320,11 +345,11 @@ function Home() {
 
       {/* TOP EMPLOYERS SHOWCASE */}
       <section id="employers" className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-        <div className="mb-8">
+        <div className="mb-8 scroll-animate fade-in-up">
           <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Featured Employers</div>
           <h2 className="text-[28px] font-600 tracking-tight">Top employers actively hiring now</h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 scroll-animate fade-in-up delay-200">
           {[
             {
               company: "Petronas Digital",
@@ -433,7 +458,7 @@ function Home() {
       {/* EVENTS & PROGRAMS */}
       <section id="events" className="border-y border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-          <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="mb-8 flex items-end justify-between gap-4 scroll-animate fade-in-down">
             <div>
               <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Programs & Events</div>
               <h2 className="text-[28px] font-600 tracking-tight">Career fairs, training & hiring events near you</h2>
@@ -525,14 +550,14 @@ function Home() {
 
       {/* AI FEATURES */}
       <section id="ai-features" className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-        <div className="mb-12 text-center">
+        <div className="mb-12 text-center scroll-animate fade-in-up">
           <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">AI-Powered Technology</div>
           <h2 className="text-[36px] font-700 tracking-tight">Smart hiring that scales with you</h2>
           <p className="mx-auto mt-3 max-w-[600px] text-[16px] text-muted-foreground">
             Our AI engine processes millions of data points to match the right talent with the right opportunities, reducing time-to-hire by 65%.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 scroll-animate scale-in delay-200">
           {[
             { icon: <Brain className="h-5 w-5"/>, title: "Smart Candidate Sourcing", desc: "AI automatically finds and ranks qualified candidates from our 2M+ talent pool", stats: "400M+ profiles analyzed", gradient: true },
             { icon: <Zap className="h-5 w-5"/>, title: "Instant Resume Parsing", desc: "Extract and structure candidate data in seconds with 99.2% accuracy", stats: "0.3s avg processing time" },
@@ -556,11 +581,11 @@ function Home() {
       {/* SUCCESS STORIES & TESTIMONIALS */}
       <section id="success" className="border-y border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-          <div className="mb-8">
+          <div className="mb-8 scroll-animate fade-in-up">
             <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Success Stories</div>
             <h2 className="text-[28px] font-600 tracking-tight">Real Malaysians, real career transformations</h2>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3 scroll-animate fade-in-up delay-200">
             {[
               { img: person1, n: "Nurul Aiman", r: "Marketing Exec, KL", q: "The AI told me exactly which 3 skills to add to my CV. Got 4 callbacks in two weeks.", video: true, journey: "From intern to manager in 18 months", stats: "+125% salary increase" },
               { img: person2, n: "Daniel Tan", r: "Software Engineer, Penang", q: "Career Signal Score made me realise I was underselling myself. Pay jump of 28% on my next role.", video: false, journey: "3 job offers in 1 month", stats: "28% salary jump" },
@@ -602,7 +627,7 @@ function Home() {
 
       {/* INDUSTRY SOLUTIONS MARQUEE */}
       <section id="industries" className="overflow-hidden py-16">
-        <div className="mx-auto mb-12 max-w-[1280px] px-4 lg:px-8">
+        <div className="mx-auto mb-12 max-w-[1280px] px-4 lg:px-8 scroll-animate fade-in-up">
           <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Industry Solutions</div>
           <h2 className="text-[36px] font-700 tracking-tight">Tailored for every Malaysian industry</h2>
           <p className="mt-3 max-w-[600px] text-[16px] text-muted-foreground">
@@ -721,11 +746,11 @@ function Home() {
 
       {/* CAREER SERVICES */}
       <section className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-        <div className="mb-8">
+        <div className="mb-8 scroll-animate fade-in-up">
           <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Career Services</div>
           <h2 className="text-[28px] font-600 tracking-tight">A complete toolkit for your career</h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 scroll-animate scale-in delay-200">
           {[
             { icon: <Sparkles/>, t: "Career Signal Score", d: "Know exactly where you stand vs. the market — and how to improve." },
             { icon: <BarChart3/>, t: "CV Market Positioning", d: "AI critique with side-by-side rewrites and tracked changes." },
@@ -751,7 +776,7 @@ function Home() {
 
             <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
               {/* Left content */}
-              <div>
+              <div className="scroll-animate fade-in-right">
                 <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">The Numbers</div>
                 <h2 className="text-[42px] font-700 leading-tight tracking-tight">ROI that speaks for itself</h2>
                 <p className="mt-3 max-w-[500px] text-[16px] text-muted-foreground">
@@ -790,7 +815,7 @@ function Home() {
               </div>
 
               {/* Right side metrics */}
-              <div className="space-y-6">
+              <div className="space-y-6 scroll-animate fade-in-left delay-200">
                 <div className="grid gap-4">
                   <div className="rounded-[16px] border border-border bg-card/95 backdrop-blur p-6">
                     <div className="flex items-center gap-3">
@@ -851,11 +876,11 @@ function Home() {
 
       {/* RESOURCES */}
       <section id="resources" className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-        <div className="mb-12">
+        <div className="mb-12 scroll-animate fade-in-up">
           <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Resources</div>
           <h2 className="text-[36px] font-700 tracking-tight">Everything you need to hire smarter</h2>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3 scroll-animate fade-in-up delay-200">
           <div className="rounded-[14px] border border-border bg-card p-6">
             <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] grad-orange text-white">
               <BookOpen className="h-5 w-5" />
@@ -901,7 +926,7 @@ function Home() {
       <section className="relative border-y border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 pb-0 pt-16 lg:px-8">
           <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
-            <div className="pb-16">
+            <div className="pb-16 scroll-animate fade-in-right">
               <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Mobile First</div>
               <h2 className="text-[36px] font-700 leading-tight tracking-tight">Hire on the go with our mobile app</h2>
               <p className="mt-3 text-[16px] text-muted-foreground">
@@ -943,7 +968,7 @@ function Home() {
             </div>
 
             {/* Mobile phone image aligned with bottom border */}
-            <div className="relative lg:mr-10">
+            <div className="relative lg:mr-10 scroll-animate fade-in-left delay-200">
               <img
                 src={downloadMobile}
                 alt="MYFutureJobs mobile app interface"
@@ -957,7 +982,7 @@ function Home() {
 
       {/* FINAL CTA */}
       <section className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
-        <div className="overflow-hidden rounded-[18px] border border-border bg-card p-8 shadow-hero lg:p-12">
+        <div className="overflow-hidden rounded-[18px] border border-border bg-card p-8 shadow-hero lg:p-12 scroll-animate fade-in-up">
           <div className="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
             <div>
               <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Get started — free</div>
@@ -988,7 +1013,7 @@ function Home() {
       {/* FOOTER */}
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 py-12 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr]">
+          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] scroll-animate fade-in-up">
             {/* Brand column */}
             <div>
               <Logo />
