@@ -16,7 +16,8 @@
       "Bash(git commit -m \"Remove nitro dependency to fix deployment conflicts\n\n- Removed nitro from devDependencies\n- nitro is already provided by @lovable.dev/vite-tanstack-config\n- This resolves the peer dependency conflict\n- Regenerated package-lock.json\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
       "Bash(npm install --legacy-peer-deps)",
       "Bash(git commit -m \"Fix deployment with legacy peer deps and compatible versions\n\n- Added .npmrc with legacy-peer-deps=true for deployment\n- Reverted @lovable.dev/vite-tanstack-config to ^2.1.1\n- Added nitro ^3.0.260603-beta back to match requirements\n- This combination should resolve all peer dependency conflicts\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(git commit -m \"Fix 404 errors in deployment with proper routing configuration\n\n- Added vercel.json with rewrites to handle client-side routing\n- Added public/_redirects file for additional deployment compatibility\n- Configured all routes to redirect to index.html for SPA routing\n- Added cache headers for static assets\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
+      "Bash(git commit -m \"Fix 404 errors in deployment with proper routing configuration\n\n- Added vercel.json with rewrites to handle client-side routing\n- Added public/_redirects file for additional deployment compatibility\n- Configured all routes to redirect to index.html for SPA routing\n- Added cache headers for static assets\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
+      "Bash(npm run build)"
     ],
     "deny": [],
     "ask": []
