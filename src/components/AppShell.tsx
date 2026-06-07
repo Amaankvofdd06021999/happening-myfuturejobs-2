@@ -2,6 +2,7 @@ import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { type ReactNode, useState, useRef, useEffect } from "react";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
+import { FloatingChatbot } from "./FloatingChatbot";
 import { Bell, Search, User, Settings, HelpCircle, LogOut, ChevronUp } from "lucide-react";
 
 export type NavItem = { to: string; label: string; icon: ReactNode };
@@ -145,6 +146,9 @@ export function AppShell({
           {rightPanel && <div className="hidden xl:block">{rightPanel}</div>}
         </div>
       </div>
+
+      {/* Floating AI Chatbot */}
+      <FloatingChatbot />
     </div>
   );
 }

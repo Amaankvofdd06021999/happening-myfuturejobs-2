@@ -6,7 +6,10 @@
       "Bash(npm run dev)",
       "Bash(npm install framer-motion zustand @tanstack/react-table)",
       "Bash(npm install framer-motion zustand @tanstack/react-table --force)",
-      "Bash(curl -I http://localhost:8080/)"
+      "Bash(curl -I http://localhost:8080/)",
+      "Bash(git add -A)",
+      "Bash(git commit -m \"Add FloatingChatbot to all dashboard pages\n\n- Added FloatingChatbot import to AppShell component\n- Chatbot now appears on jobseeker, employer, and officer dashboards\n- Maintains context-aware functionality across all pages\")",
+      "Bash(git push)"
     ],
     "deny": [],
     "ask": []
