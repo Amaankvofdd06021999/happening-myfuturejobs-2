@@ -5,7 +5,7 @@ import { AIPanel } from "@/components/AIPanel";
 import { employerNav } from "@/lib/nav";
 import { employerUser, candidates } from "@/lib/mock";
 import { Badge, SectionTitle } from "@/components/ui-bits";
-import { Sparkles, ArrowRight, X, Check, Users, Filter, Calendar, MessageSquare, FileText, Download, Star } from "lucide-react";
+import { Sparkles, ArrowRight, X, Check, Users, Filter, Calendar, MessageSquare, FileText, Download, Star, Brain, Target, TrendingUp, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -120,8 +120,9 @@ function Page() {
       <div className="mb-6">
         <div className="flex items-end justify-between flex-wrap gap-3 mb-2">
           <div>
-            <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Hiring Assistant</div>
-            <h1 className="text-[28px] font-700 tracking-tight">Fit-Match · Software Engineer (Backend)</h1>
+            <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">AI-Powered Candidate Matching</div>
+            <h1 className="text-[28px] font-700 tracking-tight">Fit Match Result</h1>
+            <p className="mt-1 text-[14px] text-muted-foreground">AI analyzes candidate profiles against job requirements</p>
           </div>
           <div className="flex items-center gap-2">
             <motion.button

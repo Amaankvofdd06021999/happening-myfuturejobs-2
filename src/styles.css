@@ -2,6 +2,30 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Accessibility styles */
+.high-contrast {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --primary: 220 100% 30%;
+  --border: 0 0% 20%;
+  --muted-foreground: 0 0% 20%;
+}
+
+.high-contrast .dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --primary: 220 100% 70%;
+  --border: 0 0% 80%;
+  --muted-foreground: 0 0% 80%;
+}
+
+.reduced-motion,
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
 /* Marquee animation */
 @keyframes marquee {
   0% { transform: translateX(0); }

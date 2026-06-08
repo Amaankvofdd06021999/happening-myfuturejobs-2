@@ -5,6 +5,7 @@ import { Search, MapPin, Sparkles, Briefcase, Building2, GraduationCap, Calendar
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { FloatingChatbot } from "@/components/FloatingChatbot";
+import { AccessibilityWidget } from "@/components/AccessibilityWidget";
 import { Badge } from "@/components/ui-bits";
 import teamHero from "@/assets/team-hero.jpg";
 import heroImage from "../../Heroimage.png";
@@ -159,6 +160,7 @@ function Home() {
 
   return (
     <div className="min-h-dvh bg-background">
+      <AccessibilityWidget />
       {/* Top nav */}
       <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-6 px-4 lg:px-8">
@@ -176,7 +178,7 @@ function Home() {
             <Link to="/signin" className="hidden h-10 items-center rounded-[10px] px-4 text-sm font-600 text-foreground hover:bg-inset sm:inline-flex">
               Sign in
             </Link>
-            <Link to="/signin" className="inline-flex h-10 items-center rounded-[10px] bg-primary px-4 text-sm font-600 text-primary-foreground hover:opacity-95">
+            <Link to="/signin" className="inline-flex h-10 items-center rounded-[10px] grad-orange px-4 text-sm font-600 text-white hover:opacity-90">
               Create account
             </Link>
           </div>
@@ -195,7 +197,7 @@ function Home() {
               Find work that <span className="text-emphasis">fits you</span>, not just any job.
             </h1>
             <p className="scroll-animate fade-in-up delay-200 mt-5 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">
-              Smart matching, AI career coaching, verified Malaysian employers, and pathways into training — all in one place.
+              Smart matching, AI career coaching, verified employers, and pathways into training — all in one place.
             </p>
 
             {/* ENHANCED SEARCH WITH AI */}
@@ -273,7 +275,6 @@ function Home() {
 
             <div className="mt-6 flex flex-wrap items-center gap-4 text-[12px] text-muted-foreground">
               <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-primary"/> Verified employers only</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary"/> Data stays on-premises</span>
               <span className="inline-flex items-center gap-1.5"><Sparkles className="h-4 w-4 text-emphasis"/> AI-powered matching</span>
             </div>
           </div>
@@ -281,7 +282,7 @@ function Home() {
           {/* Hero image */}
           <div className="relative scroll-animate fade-in-left delay-200">
             <div className="overflow-hidden rounded-[18px] border border-border shadow-hero">
-              <img src={heroImage} alt="Malaysian professional working" className="aspect-[5/4] w-full object-cover" />
+              <img src={heroImage} alt="Professional working" className="aspect-[5/4] w-full object-cover" />
             </div>
             {/* Floating cards */}
             <div className="absolute -left-4 top-10 hidden w-[230px] rounded-[12px] border border-border bg-card p-3 shadow-hero sm:block">
@@ -583,29 +584,26 @@ function Home() {
         <div className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
           <div className="mb-8 scroll-animate fade-in-up">
             <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Success Stories</div>
-            <h2 className="text-[28px] font-600 tracking-tight">Real Malaysians, real career transformations</h2>
+            <h2 className="text-[28px] font-600 tracking-tight">Real people, real career transformations</h2>
           </div>
           <div className="grid gap-5 md:grid-cols-3 scroll-animate fade-in-up delay-200">
             {[
-              { img: person1, n: "Nurul Aiman", r: "Marketing Exec, KL", q: "The AI told me exactly which 3 skills to add to my CV. Got 4 callbacks in two weeks.", video: true, journey: "From intern to manager in 18 months", stats: "+125% salary increase" },
-              { img: person2, n: "Daniel Tan", r: "Software Engineer, Penang", q: "Career Signal Score made me realise I was underselling myself. Pay jump of 28% on my next role.", video: false, journey: "3 job offers in 1 month", stats: "28% salary jump" },
-              { img: person4, n: "Mr. Suresh", r: "HR Lead, Subang", q: "Fit-Match cut our shortlisting time from 3 days to 4 hours. Bias flags caught wording I'd missed.", video: true, journey: "Hired 50+ employees via platform", stats: "75% reduction in time-to-hire" },
+              { img: person1, n: "Nurul Aiman", r: "Marketing Exec, KL", q: "The AI told me exactly which 3 skills to add to my CV. Got 4 callbacks in two weeks.", journey: "From intern to manager in 18 months", stats: "+125% salary increase" },
+              { img: person2, n: "Daniel Tan", r: "Software Engineer, Penang", q: "Career Signal Score made me realise I was underselling myself. Pay jump of 28% on my next role.", journey: "3 job offers in 1 month", stats: "28% salary jump" },
+              { img: person4, n: "Mr. Suresh", r: "HR Lead, Subang", q: "Fit-Match cut our shortlisting time from 3 days to 4 hours. Bias flags caught wording I'd missed.", journey: "Hired 50+ employees via platform", stats: "75% reduction in time-to-hire" },
             ].map((t) => (
               <figure key={t.n} className="rounded-[14px] border border-border bg-card overflow-hidden shadow-card">
-                {t.video && (
-                  <div className="relative aspect-video bg-inset">
-                    <img src={t.img} alt="" className="h-full w-full object-cover" />
-                    <button className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors">
-                      <div className="rounded-full bg-white p-3">
-                        <Play className="h-5 w-5 text-black" />
-                      </div>
-                    </button>
-                  </div>
-                )}
+                <div className="relative aspect-video bg-inset">
+                  <img src={t.img} alt="" className="h-full w-full object-cover" />
+                  <button className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors">
+                    <div className="rounded-full bg-white p-3">
+                      <Play className="h-5 w-5 text-black" />
+                    </div>
+                  </button>
+                </div>
                 <div className="p-5">
                   <blockquote className="text-[15px] leading-relaxed">"{t.q}"</blockquote>
                   <figcaption className="mt-4 flex items-center gap-3">
-                    {!t.video && <img src={t.img} alt="" className="h-10 w-10 rounded-full object-cover" />}
                     <div className="flex-1">
                       <div className="text-[13px] font-600">{t.n}</div>
                       <div className="text-[11px] text-muted-foreground">{t.r}</div>
@@ -629,7 +627,7 @@ function Home() {
       <section id="industries" className="overflow-hidden py-16">
         <div className="mx-auto mb-12 max-w-[1280px] px-4 lg:px-8 scroll-animate fade-in-up">
           <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Industry Solutions</div>
-          <h2 className="text-[36px] font-700 tracking-tight">Tailored for every Malaysian industry</h2>
+          <h2 className="text-[36px] font-700 tracking-tight">Tailored for every industry</h2>
           <p className="mt-3 max-w-[600px] text-[16px] text-muted-foreground">
             Pre-built workflows, compliance checks, and talent pools specific to your sector.
           </p>
@@ -770,104 +768,113 @@ function Home() {
         </div>
       </section>
 
-      {/* ROI METRICS */}
+      {/* CAREER DEVELOPMENT & PATHWAYS */}
       <section className="border-y border-border bg-surface">
         <div className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
+            <div className="mb-12 scroll-animate fade-in-up">
+              <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Career Development</div>
+              <h2 className="text-[42px] font-700 leading-tight tracking-tight">Build your future with proven pathways</h2>
+              <p className="mt-3 max-w-[600px] text-[16px] text-muted-foreground">
+                Discover trending career paths, gain in-demand certifications, and access personalized development insights.
+              </p>
+            </div>
 
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-              {/* Left content */}
-              <div className="scroll-animate fade-in-right">
-                <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">The Numbers</div>
-                <h2 className="text-[42px] font-700 leading-tight tracking-tight">ROI that speaks for itself</h2>
-                <p className="mt-3 max-w-[500px] text-[16px] text-muted-foreground">
-                  Companies using MYFutureJobs see measurable improvements across all hiring metrics within 30 days.
-                </p>
-
-                <div className="mt-10 space-y-5">
-                  {[
-                    { icon: <Clock className="h-5 w-5" />, metric: "Time to hire", before: "45 days", after: "12 days", improvement: "-73%", color: "orange" },
-                    { icon: <Briefcase className="h-5 w-5" />, metric: "Cost per hire", before: "RM 8,500", after: "RM 2,100", improvement: "-75%", color: "orange" },
-                    { icon: <Star className="h-5 w-5" />, metric: "Quality of hire", before: "62%", after: "89%", improvement: "+44%", color: "orange" },
-                    { icon: <UserCircle className="h-5 w-5" />, metric: "Candidate experience", before: "3.2/5", after: "4.7/5", improvement: "+47%", color: "orange" }
-                  ].map((stat) => (
-                    <div key={stat.metric} className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-orange-200 bg-orange-50 text-orange-600">
-                        {stat.icon}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[15px] font-600">{stat.metric}</span>
-                          <span className="rounded-full bg-green-100 px-3 py-1 text-[12px] font-600 text-green-600">{stat.improvement}</span>
+            <div className="grid gap-8 lg:grid-cols-3">
+              {/* Top Career Pathways */}
+              <div className="scroll-animate fade-in-up">
+                <div className="rounded-[16px] border border-border bg-card p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] grad-orange text-white">
+                    <Target className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-[20px] font-600 mb-4">Top Career Pathways</h3>
+                  <div className="space-y-3">
+                    {[
+                      { path: "Data Analytics", growth: "+42%", openings: "3.2K" },
+                      { path: "Digital Marketing", growth: "+38%", openings: "2.8K" },
+                      { path: "Cloud Engineering", growth: "+56%", openings: "1.9K" },
+                      { path: "UX/UI Design", growth: "+31%", openings: "1.5K" },
+                      { path: "Cybersecurity", growth: "+48%", openings: "2.1K" }
+                    ].map((item) => (
+                      <div key={item.path} className="flex items-center justify-between p-3 rounded-[10px] bg-inset hover:bg-primary-soft transition-colors cursor-pointer">
+                        <div>
+                          <div className="text-[14px] font-600">{item.path}</div>
+                          <div className="text-[11px] text-muted-foreground">{item.openings} openings</div>
                         </div>
-                        <div className="mt-1 flex items-center gap-2 text-[13px]">
-                          <span className="text-muted-foreground">Before: {stat.before}</span>
-                          <ArrowRight className="h-3 w-3 text-muted-foreground" />
-                          <span className="font-600 text-emphasis">After: {stat.after}</span>
-                        </div>
+                        <div className="text-[13px] font-600 text-emphasis">{item.growth}</div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-
-                <button onClick={handleROICalculator} className="mt-8 inline-flex h-12 items-center rounded-[10px] grad-orange px-8 text-[15px] font-600 text-white hover:opacity-90 transition-opacity">
-                  Calculate your ROI →
-                </button>
               </div>
 
-              {/* Right side metrics */}
-              <div className="space-y-6 scroll-animate fade-in-left delay-200">
-                <div className="grid gap-4">
-                  <div className="rounded-[16px] border border-border bg-card/95 backdrop-blur p-6">
-                    <div className="flex items-center gap-3">
-                      <Users className="h-8 w-8 text-emphasis" />
-                      <div>
-                        <div className="text-[36px] font-700 text-emphasis num leading-tight">2.3M+</div>
-                        <div className="text-[13px] text-muted-foreground">Successful placements to date</div>
-                      </div>
-                    </div>
+              {/* Popular Certifications */}
+              <div className="scroll-animate fade-in-up delay-100">
+                <div className="rounded-[16px] border border-border bg-card p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-primary-soft text-primary">
+                    <Award className="h-5 w-5" />
                   </div>
-
-                  <div className="rounded-[16px] border border-border bg-card/95 backdrop-blur p-6">
-                    <div className="flex items-center gap-3">
-                      <Building2 className="h-8 w-8 text-emphasis" />
-                      <div>
-                        <div className="text-[36px] font-700 text-emphasis num leading-tight">8,400+</div>
-                        <div className="text-[13px] text-muted-foreground">Companies actively hiring</div>
+                  <h3 className="text-[20px] font-600 mb-4">Popular Certifications</h3>
+                  <div className="space-y-3">
+                    {[
+                      { cert: "Google Data Analytics", duration: "6 months", level: "Beginner" },
+                      { cert: "AWS Cloud Practitioner", duration: "3 months", level: "Intermediate" },
+                      { cert: "PMP Certification", duration: "4 months", level: "Advanced" },
+                      { cert: "Scrum Master", duration: "2 months", level: "Intermediate" },
+                      { cert: "Digital Marketing", duration: "3 months", level: "Beginner" }
+                    ].map((item) => (
+                      <div key={item.cert} className="p-3 rounded-[10px] border border-border hover:border-primary transition-colors cursor-pointer">
+                        <div className="text-[14px] font-600">{item.cert}</div>
+                        <div className="mt-1 flex items-center gap-3 text-[11px] text-muted-foreground">
+                          <span>{item.duration}</span>
+                          <span>•</span>
+                          <span>{item.level}</span>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-[16px] border border-border bg-card/95 backdrop-blur p-6">
-                    <div className="flex items-center gap-3">
-                      <Award className="h-8 w-8 text-emphasis" />
-                      <div>
-                        <div className="text-[36px] font-700 text-emphasis num leading-tight">4.8/5</div>
-                        <div className="text-[13px] text-muted-foreground">Average employer rating</div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
+              </div>
 
-                {/* This month card */}
-                <div className="rounded-[16px] border border-primary bg-primary-soft p-6">
-                  <div className="mb-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="h-5 w-5 text-primary" />
-                      <span className="text-[12px] font-600 uppercase text-primary">This Month</span>
-                    </div>
-                    <Badge tone="success">+26%</Badge>
+              {/* Career Insights */}
+              <div className="scroll-animate fade-in-up delay-200">
+                <div className="rounded-[16px] border border-border bg-card p-6">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-primary-soft text-primary">
+                    <TrendingUp className="h-5 w-5" />
                   </div>
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <div className="text-[32px] font-700 num">62,847</div>
-                      <div className="text-[13px] text-muted-foreground">New jobs posted</div>
-                    </div>
-                    <div className="flex items-end gap-1">
-                      {[20, 35, 25, 40, 30, 45, 55].map((h, i) => (
-                        <div key={i} className="w-2 rounded-t bg-primary/30" style={{ height: `${h}px` }} />
+                  <h3 className="text-[20px] font-600 mb-4">Career Insights</h3>
+
+                  {/* Skills in Demand */}
+                  <div className="mb-6">
+                    <div className="text-[13px] font-600 text-muted-foreground mb-3">Skills in High Demand</div>
+                    <div className="flex flex-wrap gap-2">
+                      {["Python", "React", "Cloud", "AI/ML", "Agile", "Data Analysis"].map((skill) => (
+                        <span key={skill} className="px-3 py-1 rounded-full bg-primary-soft text-[12px] font-500">
+                          {skill}
+                        </span>
                       ))}
                     </div>
                   </div>
+
+                  {/* Industry Growth */}
+                  <div>
+                    <div className="text-[13px] font-600 text-muted-foreground mb-3">Fastest Growing Industries</div>
+                    <div className="space-y-2">
+                      {[
+                        { industry: "Technology", growth: "+18%" },
+                        { industry: "Healthcare", growth: "+15%" },
+                        { industry: "E-commerce", growth: "+22%" }
+                      ].map((item) => (
+                        <div key={item.industry} className="flex items-center justify-between text-[13px]">
+                          <span>{item.industry}</span>
+                          <span className="font-600 text-emphasis">{item.growth}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button className="mt-6 w-full rounded-[10px] border border-primary bg-primary-soft p-2 text-[13px] font-600 text-primary hover:bg-primary hover:text-white transition-colors">
+                    View Full Report →
+                  </button>
                 </div>
               </div>
             </div>
@@ -878,45 +885,45 @@ function Home() {
       <section id="resources" className="mx-auto max-w-[1280px] px-4 py-16 lg:px-8">
         <div className="mb-12 scroll-animate fade-in-up">
           <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Resources</div>
-          <h2 className="text-[36px] font-700 tracking-tight">Everything you need to hire smarter</h2>
+          <h2 className="text-[36px] font-700 tracking-tight">Tools to accelerate your career</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3 scroll-animate fade-in-up delay-200">
           <div className="rounded-[14px] border border-border bg-card p-6">
             <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] grad-orange text-white">
               <BookOpen className="h-5 w-5" />
             </div>
-            <h3 className="text-[18px] font-600">Hiring Playbooks</h3>
+            <h3 className="text-[18px] font-600">Career Guides</h3>
             <p className="mt-2 text-[14px] text-muted-foreground">
-              Step-by-step guides for hiring across 50+ roles with Malaysian market insights.
+              Step-by-step guides for career development and job search strategies.
             </p>
-            <button onClick={() => handleResourceAction("Hiring Guides")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-primary hover:gap-2 transition-all">
+            <button onClick={() => handleResourceAction("Career Guides")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-emphasis hover:gap-2 transition-all">
               Browse all guides <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
           <div className="rounded-[14px] border border-border bg-card p-6">
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-primary-soft text-primary">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] grad-orange text-white">
               <Play className="h-5 w-5" />
             </div>
-            <h3 className="text-[18px] font-600">Webinar Series</h3>
+            <h3 className="text-[18px] font-600">Video Tutorials</h3>
             <p className="mt-2 text-[14px] text-muted-foreground">
-              Weekly sessions with HR leaders sharing recruitment best practices.
+              Learn interview techniques and career skills through interactive videos.
             </p>
-            <button onClick={() => handleResourceAction("Webinars")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-primary hover:gap-2 transition-all">
-              Register for webinars <ChevronRight className="h-4 w-4" />
+            <button onClick={() => handleResourceAction("Video Tutorials")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-emphasis hover:gap-2 transition-all">
+              Watch tutorials <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
           <div className="rounded-[14px] border border-border bg-card p-6">
-            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] bg-primary-soft text-primary">
+            <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-[10px] grad-orange text-white">
               <FileText className="h-5 w-5" />
             </div>
-            <h3 className="text-[18px] font-600">Templates & Tools</h3>
+            <h3 className="text-[18px] font-600">Resume Builder</h3>
             <p className="mt-2 text-[14px] text-muted-foreground">
-              Ready-to-use templates for job descriptions, interviews, and offers.
+              AI-powered resume builder with ATS-friendly templates and tips.
             </p>
-            <button onClick={() => handleResourceAction("Templates")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-primary hover:gap-2 transition-all">
-              Access templates <ChevronRight className="h-4 w-4" />
+            <button onClick={() => handleResourceAction("Resume Builder")} className="mt-5 inline-flex items-center gap-1 text-[13px] font-600 text-emphasis hover:gap-2 transition-all">
+              Build your resume <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -936,7 +943,7 @@ function Home() {
                 {[
                   "Push notifications for new applications",
                   "One-tap candidate review and shortlisting",
-                  "Voice notes for team collaboration",
+                  "Real-time collaboration features",
                   "Offline mode for uninterrupted workflow"
                 ].map((feature) => (
                   <div key={feature} className="flex items-start gap-3 text-[14px]">
@@ -949,20 +956,27 @@ function Home() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <button
                   onClick={() => handleAppDownload("iOS App")}
-                  className="inline-flex h-11 items-center gap-2 rounded-[8px] bg-black px-6 text-[14px] font-600 text-white hover:opacity-90 transition-opacity"
+                  className="inline-flex h-11 items-center gap-2 rounded-[8px] bg-black px-5 text-[14px] font-600 text-white hover:opacity-90 transition-opacity"
                 >
                   <Smartphone className="h-4 w-4" />
-                  Download for iOS
+                  iOS
                 </button>
                 <button
                   onClick={() => handleAppDownload("Android")}
-                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-white px-6 text-[14px] font-600 text-foreground hover:border-primary hover:bg-gray-50 transition-colors"
+                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-white px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-gray-50 transition-colors"
                 >
                   <Smartphone className="h-4 w-4" />
-                  Get for Android
+                  Android
+                </button>
+                <button
+                  onClick={() => handleAppDownload("Huawei AppGallery")}
+                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-white px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-gray-50 transition-colors"
+                >
+                  <Smartphone className="h-4 w-4" />
+                  Huawei
                 </button>
               </div>
             </div>
@@ -987,7 +1001,7 @@ function Home() {
             <div>
               <div className="mb-2 text-[12px] font-600 uppercase tracking-wider text-emphasis">Get started — free</div>
               <h2 className="text-[36px] font-700 leading-tight tracking-tight">Three minutes to your first AI-matched job</h2>
-              <p className="mt-3 max-w-lg text-[15px] text-muted-foreground">No fees, no spam, no agency middlemen. Built and run by PERKESO for every Malaysian.</p>
+              <p className="mt-3 max-w-lg text-[15px] text-muted-foreground">No fees, no spam, no agency middlemen. Built and run by PERKESO for everyone.</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/signin" className="inline-flex h-11 items-center rounded-[10px] grad-orange px-6 text-sm font-600 text-white">Create your account →</Link>
                 <Link to="/signin" className="inline-flex h-11 items-center rounded-[10px] border border-border bg-card px-6 text-sm font-600">I'm an employer</Link>

@@ -4,7 +4,8 @@ import { AIPanel } from "@/components/AIPanel";
 import { employerNav } from "@/lib/nav";
 import { employerUser } from "@/lib/mock";
 import { Badge, SectionTitle } from "@/components/ui-bits";
-import { Sparkles, Download, Flag, CheckCircle2, AlertCircle } from "lucide-react";
+import { Sparkles, Download, Flag, CheckCircle2, AlertCircle, Brain, FileText, Info, Target } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/employer/interview")({
   head: () => ({ meta: [{ title: "Interview Question Generator — MYFutureJobs" }] }),
@@ -59,13 +60,41 @@ function Page() {
         </AIPanel>
       }
     >
-      <div className="mb-6 flex items-end justify-between flex-wrap gap-3">
-        <div>
-          <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Hiring Assistant</div>
-          <h1 className="text-[28px] font-700 tracking-tight">Interview Pack · Aisyah Rahman</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Software Engineer (Backend) — 28 Feb 14:00</p>
+      <div className="mb-6">
+        <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">AI Interview Assistant</div>
+        <h1 className="text-[28px] font-700 tracking-tight">Prepare for Candidate Interviews</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          5 Questions for Clark J. Kent · Standard mode · 5 credits charged
+        </p>
+      </div>
+
+      {/* AI Alert Box */}
+      <div className="mb-4 rounded-[12px] border border-info bg-info-soft p-4">
+        <div className="flex items-start gap-3">
+          <Info className="h-5 w-5 text-info mt-0.5" />
+          <div className="flex-1">
+            <div className="font-600 text-[14px]">Interview Preparation Assistant</div>
+            <p className="text-[12px] text-muted-foreground mt-1">
+              Select a candidate from your talent pool and optionally attach a job description from the JD Store or paste one directly.
+              The AI generates targeted interview questions with ideal answers, key points, and pitfalls based on the candidate's profile.
+            </p>
+            <div className="mt-2 flex gap-2">
+              <button
+                onClick={() => toast.success("Exporting interview pack...", { description: "PDF will download shortly" })}
+                className="inline-flex h-8 items-center rounded-[8px] grad-orange px-4 text-[12px] font-600 text-white hover:opacity-90"
+              >
+                <FileText className="h-3 w-3 mr-1" />
+                Export PDF
+              </button>
+              <button
+                onClick={() => toast.info("Starting new interview session...")}
+                className="inline-flex h-8 items-center rounded-[8px] border border-primary bg-white px-4 text-[12px] font-600 text-primary hover:bg-primary-soft"
+              >
+                New Session
+              </button>
+            </div>
+          </div>
         </div>
-        <Badge tone="ai"><Sparkles className="h-3 w-3"/> AI generated</Badge>
       </div>
 
       <div className="space-y-6">

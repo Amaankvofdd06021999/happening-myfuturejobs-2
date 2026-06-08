@@ -239,11 +239,35 @@ function Page() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Career Assistant</div>
-        <h1 className="text-[28px] font-700 tracking-tight">CV Market Positioning Analysis</h1>
+        <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">AI-Powered Resume Analysis</div>
+        <h1 className="text-[28px] font-700 tracking-tight">Market Positioning Snapshot</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          See how your CV positions you in the market and what to optimize
+          AI analyzes your resume against real job market data to identify strengths, gaps, and opportunities
         </p>
+      </motion.div>
+
+      {/* AI Analysis Alert */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-4 rounded-[12px] border border-primary bg-primary-soft p-4"
+      >
+        <div className="flex items-start gap-3">
+          <Brain className="h-5 w-5 text-primary mt-0.5" />
+          <div className="flex-1">
+            <div className="font-600 text-[14px]">AI Resume Positioning Assistant</div>
+            <p className="text-[12px] text-muted-foreground mt-1">
+              Analyzing your profile as: Director / Senior Director (practice head / lead for government digital programs)
+            </p>
+            <button
+              onClick={handleCVAnalysis}
+              disabled={analyzingCV}
+              className="mt-2 inline-flex h-8 items-center rounded-[8px] grad-orange px-4 text-[12px] font-600 text-white hover:opacity-90 disabled:opacity-50"
+            >
+              {analyzingCV ? "Analyzing..." : "Run Positioning Analysis"}
+            </button>
+          </div>
+        </div>
       </motion.div>
 
       {/* Score cards */}

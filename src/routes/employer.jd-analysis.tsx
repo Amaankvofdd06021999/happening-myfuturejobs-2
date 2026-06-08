@@ -4,7 +4,8 @@ import { AIPanel } from "@/components/AIPanel";
 import { employerNav } from "@/lib/nav";
 import { employerUser } from "@/lib/mock";
 import { ScoreCard, Badge, SectionTitle, KPITile } from "@/components/ui-bits";
-import { Sparkles, DollarSign, Check, X, TrendingUp } from "lucide-react";
+import { Sparkles, DollarSign, Check, X, TrendingUp, AlertTriangle, CheckCircle2, Info, Globe, Users, Target } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/employer/jd-analysis")({
   head: () => ({ meta: [{ title: "JD Analysis — MYFutureJobs" }] }),
@@ -39,36 +40,149 @@ function Page() {
       }
     >
       <div className="mb-6">
-        <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Hiring Assistant</div>
-        <h1 className="text-[28px] font-700 tracking-tight">JD Analysis — Software Engineer (Backend)</h1>
+        <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">AI-Powered Job Description Optimization</div>
+        <h1 className="text-[28px] font-700 tracking-tight">SAP S/4HANA Programme Director</h1>
+        <p className="mt-2 text-[14px] text-muted-foreground">Management Consulting • Senior Leadership Role</p>
+      </div>
+
+      <div className="mb-4 rounded-[12px] border border-warning bg-warning-soft p-4">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="h-5 w-5 text-warning mt-0.5" />
+          <div className="flex-1">
+            <div className="font-600 text-[14px]">Re-Analyze with AI Atlas (saves to JD Store)</div>
+            <p className="text-[12px] text-muted-foreground mt-1">AI will detect bias, suggest improvements, and benchmark against market data</p>
+          </div>
+          <button
+            onClick={() => toast.success("Analyzing JD with AI...", { description: "This will take a few seconds" })}
+            className="inline-flex h-8 items-center rounded-[8px] grad-orange px-4 text-[12px] font-600 text-white hover:opacity-90"
+          >
+            Re-Analyze
+          </button>
+        </div>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr_1fr]">
-        <ScoreCard value={64} band="Needs work" label="JD Quality Score" />
-        <KPITile label="Salary benchmark" value="RM 7.8k" delta="Range 6.5 – 9.2k · High confidence" icon={<DollarSign className="h-4 w-4"/>} emphasis />
-        <KPITile label="Predicted applicants" value="180–240" delta="+85% if improved" icon={<TrendingUp className="h-4 w-4"/>}/>
+        <div className="rounded-[12px] border border-border bg-card p-5 shadow-card">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[13px] font-600 text-muted-foreground">Overall Score</span>
+            <Badge tone="success">8.0/10</Badge>
+          </div>
+          <div className="text-[36px] font-700 num text-emphasis">8.0</div>
+          <div className="text-[12px] text-muted-foreground">Strong and highly attractive for senior SAP leaders</div>
+        </div>
+        <KPITile label="Salary Competitiveness" value="GBP 180-220k" delta="Large performance bonus (40-60%)" icon={<DollarSign className="h-4 w-4"/>} emphasis />
+        <KPITile label="Market Reach" value="High" delta="15+ years required" icon={<Globe className="h-4 w-4"/>}/>
       </div>
 
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+      <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        {/* Market Competitiveness */}
         <article className="rounded-[12px] border border-border bg-card p-5 shadow-card">
-          <header className="mb-3 flex items-center justify-between">
-            <div className="font-600">Original</div>
-            <Badge tone="default">Score 64</Badge>
+          <header className="mb-4 flex items-center gap-2">
+            <Target className="h-4 w-4 text-primary" />
+            <div className="font-600 text-[14px]">Market Competitiveness</div>
           </header>
-          <div className="space-y-2 text-[13px] leading-relaxed text-muted-foreground">
-            <p>We are looking for an energetic backend ninja with 5+ years of experience. Must be a rockstar coder and team player. Salary negotiable.</p>
-            <p>Responsibilities: Build features, fix bugs, handle deployments. Other duties as assigned.</p>
+          <div className="space-y-3">
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+              <div className="flex-1">
+                <div className="text-[12px] font-500">Clear senior leadership role</div>
+                <div className="text-[11px] text-muted-foreground">Strategic client exposure</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+              <div className="flex-1">
+                <div className="text-[12px] font-500">Competitive base salary</div>
+                <div className="text-[11px] text-muted-foreground">GBP 180k-220k plus large bonus</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-2">
+              <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
+              <div className="flex-1">
+                <div className="text-[12px] font-500">Strong benefits package</div>
+                <div className="text-[11px] text-muted-foreground">Global mobility & sabbatical offerings</div>
+              </div>
+            </div>
+            <div className="mt-3 pt-3 border-t border-border">
+              <div className="flex items-start gap-2">
+                <AlertTriangle className="h-4 w-4 text-warning mt-0.5" />
+                <div className="flex-1">
+                  <div className="text-[12px] font-500 text-warning">Areas to Improve</div>
+                  <ul className="mt-1 text-[11px] text-muted-foreground space-y-1">
+                    <li>• High experience requirement (15+ years)</li>
+                    <li>• Vague travel expectations</li>
+                    <li>• No explicit visa/relocation support</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </article>
-        <article className="rounded-[12px] border border-emphasis bg-emphasis-soft/30 p-5 shadow-card">
-          <header className="mb-3 flex items-center justify-between">
-            <div className="font-600">AI-improved</div>
-            <Badge tone="emphasis"><Sparkles className="h-3 w-3"/> Score 88</Badge>
+
+        {/* Clarity Issues */}
+        <article className="rounded-[12px] border border-border bg-card p-5 shadow-card">
+          <header className="mb-4 flex items-center gap-2">
+            <Info className="h-4 w-4 text-primary" />
+            <div className="font-600 text-[14px]">Clarity Issues</div>
           </header>
-          <div className="space-y-2 text-[13px] leading-relaxed">
-            <p>Join a 12-person backend team building real-time payments infrastructure on Go and PostgreSQL. We're seeking a skilled engineer (3+ years required, 5+ preferred) to lead service design and mentor 2 juniors.</p>
-            <p><b>You'll:</b> design APIs, drive deployments via CI/CD, partner with product on roadmap.</p>
-            <p><b>Salary:</b> RM 7,000 – 9,200 + bonus, hybrid (3 days KL Sentral).</p>
+          <div className="space-y-3">
+            <div className="rounded-[8px] border border-warning bg-warning-soft p-3">
+              <div className="text-[12px] font-600 text-warning mb-1">Vague Requirements</div>
+              <div className="text-[11px] space-y-1">
+                <p className="italic">"Deep hands-on experience"</p>
+                <p>→ Quantify: number/type of projects</p>
+              </div>
+            </div>
+            <div className="rounded-[8px] border border-warning bg-warning-soft p-3">
+              <div className="text-[12px] font-600 text-warning mb-1">Missing Information</div>
+              <ul className="text-[11px] space-y-0.5">
+                <li>• Employment contract type not specified</li>
+                <li>• Expected travel percentage unclear</li>
+                <li>• Reporting line not mentioned</li>
+              </ul>
+            </div>
+            <div className="rounded-[8px] bg-primary-soft border border-primary p-3">
+              <div className="text-[12px] font-600 text-primary mb-1">Corporate Jargon</div>
+              <div className="text-[11px]">
+                <span className="font-500">RISE with SAP</span> • <span className="font-500">SAP BTP</span> • <span className="font-500">SAP Integration Suite</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        {/* Bias Detection */}
+        <article className="rounded-[12px] border border-border bg-card p-5 shadow-card">
+          <header className="mb-4 flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-warning" />
+            <div className="font-600 text-[14px]">Bias Detection</div>
+            <Badge tone="warning" className="ml-auto">Medium</Badge>
+          </header>
+          <div className="space-y-3">
+            <div className="rounded-[8px] border border-danger bg-danger-soft p-3">
+              <div className="text-[12px] font-600 mb-1">Gender-Coded Language</div>
+              <div className="space-y-1">
+                <div className="text-[11px]">
+                  <span className="px-1.5 py-0.5 rounded bg-danger text-white">"exceptional leader"</span>
+                  <span className="px-1.5 py-0.5 rounded bg-danger text-white ml-1">"world-class"</span>
+                </div>
+                <div className="text-[11px]">
+                  <span className="px-1.5 py-0.5 rounded bg-danger text-white">"high-profile"</span>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-[8px] border border-warning bg-warning-soft p-3">
+              <div className="text-[12px] font-600 mb-1">Age Bias Indicators</div>
+              <ul className="text-[11px] space-y-0.5">
+                <li>• Minimum 15 years of experience</li>
+                <li>• 5 years in senior leadership role</li>
+              </ul>
+            </div>
+            <div className="rounded-[8px] border border-warning bg-warning-soft p-3">
+              <div className="text-[12px] font-600 mb-1">Exclusionary Requirements</div>
+              <div className="text-[11px]">
+                Preference for top-tier consulting firms may exclude diverse talent
+              </div>
+            </div>
           </div>
         </article>
       </div>
