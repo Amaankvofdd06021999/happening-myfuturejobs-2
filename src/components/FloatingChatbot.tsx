@@ -181,7 +181,7 @@ export function FloatingChatbot() {
   return (
     <>
       {!open && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-20 right-6 z-50 lg:bottom-6">
           {/* Context tip bubble */}
           {showTip && (
             <div className="absolute bottom-16 right-0 mb-2 w-64 animate-fade-in rounded-[10px] border border-border bg-card p-3 shadow-hero">
@@ -217,7 +217,7 @@ export function FloatingChatbot() {
       )}
 
       {open && (
-        <div className="fixed bottom-6 right-6 z-50 flex h-[600px] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-[14px] border border-border bg-card shadow-hero">
+        <div className="fixed bottom-20 right-6 z-50 flex h-[500px] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-[14px] border border-border bg-card shadow-hero lg:bottom-6 lg:h-[600px]">
           {/* Header with current context */}
           <div className="flex items-center justify-between border-b border-border bg-emphasis-soft px-4 py-3">
             <div className="flex items-center gap-2">
