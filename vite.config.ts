@@ -14,5 +14,19 @@ export default defineConfig({
   },
   nitro: {
     preset: "vercel"
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      },
+      chunkSizeWarningLimit: 1000,
+      sourcemap: false
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', '@tanstack/react-router']
+    }
   }
 });
