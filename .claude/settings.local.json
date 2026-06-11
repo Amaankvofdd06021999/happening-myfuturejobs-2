@@ -22,7 +22,8 @@
       "Bash(curl -I http://localhost:5173/)",
       "Bash(findstr LISTENING)",
       "Bash(findstr \"127.0.0.1\\|0.0.0.0\")",
-      "Bash(findstr \":[0-9]\")"
+      "Bash(findstr \":[0-9]\")",
+      "Read(//c/Users/PRISM/Downloads/**)"
     ],
     "deny": [],
     "ask": []

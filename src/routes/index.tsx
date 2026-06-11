@@ -294,8 +294,8 @@ function Home() {
                 </div>
               </div>
               <div className="mt-3 flex items-center justify-between text-[11px]">
-                <span className="text-muted-foreground">Career Signal</span>
-                <span className="num font-600 text-emphasis">82</span>
+                <span className="text-muted-foreground">Profile Score</span>
+                <span className="num font-600 text-emphasis">82%</span>
               </div>
               <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-inset"><div className="h-full bg-emphasis" style={{ width: "82%" }} /></div>
             </div>
@@ -327,7 +327,7 @@ function Home() {
             {[
               { icon: <Briefcase className="h-5 w-5"/>, t: "I'm looking for a job", d: "Build your profile, get AI-matched roles, and track every application.", to: "/signin", emp: false, cta: "Find jobs" },
               { icon: <Building2 className="h-5 w-5"/>, t: "I'm hiring talent", d: "Post vacancies, screen with AI fit-match, and book interviews faster.", to: "/signin", emp: true, cta: "Post a job" },
-              { icon: <ShieldCheck className="h-5 w-5"/>, t: "Case Officer (PERKESO)", d: "Manage caseloads, oversee employers, and run market intelligence.", to: "/signin", emp: false, cta: "Officer sign-in" },
+              { icon: <ShieldCheck className="h-5 w-5"/>, t: "Case Officer (PERKESO)", d: "Manage caseloads, handle job seeker profile cases, and provide career counseling.", to: "/signin", emp: false, cta: "Officer sign-in" },
             ].map((r) => (
               <Link key={r.t} to={r.to} className="group rounded-[14px] border border-border bg-card p-6 transition-shadow hover:shadow-hero">
                 <span className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-[10px] ${r.emp ? "grad-orange text-white" : "bg-primary-soft text-primary"}`}>
@@ -588,9 +588,9 @@ function Home() {
           </div>
           <div className="grid gap-5 md:grid-cols-3 scroll-animate fade-in-up delay-200">
             {[
-              { img: person1, n: "Nurul Aiman", r: "Marketing Exec, KL", q: "The AI told me exactly which 3 skills to add to my CV. Got 4 callbacks in two weeks.", journey: "From intern to manager in 18 months", stats: "+125% salary increase" },
-              { img: person2, n: "Daniel Tan", r: "Software Engineer, Penang", q: "Career Signal Score made me realise I was underselling myself. Pay jump of 28% on my next role.", journey: "3 job offers in 1 month", stats: "28% salary jump" },
-              { img: person4, n: "Mr. Suresh", r: "HR Lead, Subang", q: "Fit-Match cut our shortlisting time from 3 days to 4 hours. Bias flags caught wording I'd missed.", journey: "Hired 50+ employees via platform", stats: "75% reduction in time-to-hire" },
+              { img: person1, n: "Sarah Johnson", r: "Marketing Exec, KL", q: "The AI told me exactly which 3 skills to add to my CV. Got 4 callbacks in two weeks.", journey: "From intern to manager in 18 months", stats: "+125% salary increase" },
+              { img: person2, n: "Mike Chen", r: "Software Engineer, Penang", q: "Profile matching made me realise I was underselling myself. Pay jump of 28% on my next role.", journey: "3 job offers in 1 month", stats: "28% salary jump" },
+              { img: person4, n: "John Smith", r: "HR Lead, Subang", q: "Fit-Match cut our shortlisting time from 3 days to 4 hours. Bias flags caught wording I'd missed.", journey: "Hired 50+ employees via platform", stats: "75% reduction in time-to-hire" },
             ].map((t) => (
               <figure key={t.n} className="rounded-[14px] border border-border bg-card overflow-hidden shadow-card">
                 <div className="relative aspect-video bg-inset">
@@ -665,7 +665,7 @@ function Home() {
                     borderColor: "border-gray-500/20"
                   },
                   {
-                    industry: "Retail & F&B",
+                    industry: "Retail and F&B",
                     icon: <Users className="h-8 w-8" />,
                     features: ["High-volume hiring", "Part-time management", "Location matching"],
                     talent: "85K+ frontliners",
@@ -750,14 +750,14 @@ function Home() {
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 scroll-animate scale-in delay-200">
           {[
-            { icon: <Sparkles/>, t: "Career Signal Score", d: "Know exactly where you stand vs. the market — and how to improve." },
             { icon: <BarChart3/>, t: "CV Market Positioning", d: "AI critique with side-by-side rewrites and tracked changes." },
             { icon: <GraduationCap/>, t: "Training Pathways", d: "Certifications mapped to roles you want, not roles you don't." },
             { icon: <Award/>, t: "Interview Rewards", d: "Transport vouchers when you attend interviews via the portal." },
             { icon: <Users/>, t: "Verified Employers", d: "Every company is screened by PERKESO before posting." },
             { icon: <Calendar/>, t: "Events & Carnivals", d: "RSVP, walk-in interviews and on-site hiring across Malaysia." },
             { icon: <Briefcase/>, t: "Application Tracker", d: "Applied → Interview → KIV → Hired. Never lose track again." },
-            { icon: <ShieldCheck/>, t: "On-prem AI, anonymised", d: "Your data never leaves PERKESO infrastructure." },
+            { icon: <ShieldCheck/>, t: "Secured DATA", d: "Your data never leaves PERKESO infrastructure." },
+            { icon: <Sparkles/>, t: "AI Career Coaching", d: "Personalized guidance to accelerate your career growth." },
           ].map((s) => (
             <div key={s.t} className="rounded-[12px] border border-border bg-card p-5">
               <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-[8px] bg-primary-soft text-primary">{s.icon}</span>

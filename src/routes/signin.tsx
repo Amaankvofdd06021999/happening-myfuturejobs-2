@@ -64,10 +64,11 @@ function SignIn() {
             >
               <div>
                 <label className="mb-1.5 block text-[12px] font-600 text-muted-foreground">
-                  {role === "officer" ? "Staff ID" : "Email or IC number"}
+                  {role === "officer" ? "Staff ID" : role === "jobseeker" ? "IC Number" : "Email"}
                 </label>
                 <input
-                  defaultValue={role === "jobseeker" ? "nurul.aiman@gmail.com" : role === "employer" ? "hr@petronas.com.my" : "PKS-2041"}
+                  placeholder={role === "jobseeker" ? "e.g., 901215-14-5678" : role === "employer" ? "john.doe@company.com" : "PKS-2041"}
+                  defaultValue={role === "jobseeker" ? "" : role === "employer" ? "mike.smith@petronas.com.my" : "PKS-2041"}
                   className="h-11 w-full rounded-[10px] border border-border bg-card px-3 text-sm outline-none focus:border-primary"
                 />
               </div>
@@ -92,9 +93,11 @@ function SignIn() {
                 <button type="button" className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
                   <KeyRound className="h-4 w-4" /> MyDigital ID
                 </button>
-                <button type="button" className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
-                  <ShieldCheck className="h-4 w-4" /> PERKESO SSO
-                </button>
+                {role !== "jobseeker" && (
+                  <button type="button" className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
+                    <ShieldCheck className="h-4 w-4" /> PERKESO SSO
+                  </button>
+                )}
               </div>
 
               <p className="text-center text-[12px] text-muted-foreground">
@@ -114,9 +117,9 @@ function SignIn() {
           <div className="rounded-[14px] bg-white/95 p-6 backdrop-blur shadow-hero">
             <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Featured story</div>
             <blockquote className="mt-2 text-[18px] font-600 leading-snug text-foreground">
-              "Career Signal told me which skills mattered most. Five callbacks in two weeks."
+              "AI-powered matching told me which skills mattered most. Five callbacks in two weeks."
             </blockquote>
-            <div className="mt-3 text-[13px] text-muted-foreground">Nurul A. · Marketing Exec, Kuala Lumpur</div>
+            <div className="mt-3 text-[13px] text-muted-foreground">Mike Johnson · Marketing Exec, Kuala Lumpur</div>
           </div>
         </div>
       </div>
