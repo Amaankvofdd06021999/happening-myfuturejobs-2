@@ -49,7 +49,7 @@ function Page() {
         <div className="flex items-start gap-3">
           <AlertTriangle className="h-5 w-5 text-warning mt-0.5" />
           <div className="flex-1">
-            <div className="font-600 text-[14px]">Re-Analyze with AI Atlas (saves to JD Store)</div>
+            <div className="font-600 text-[14px]">Re-Analyze with AI (saves to JD Store)</div>
             <p className="text-[12px] text-muted-foreground mt-1">AI will detect bias, suggest improvements, and benchmark against market data</p>
           </div>
           <button
@@ -70,7 +70,7 @@ function Page() {
           <div className="text-[36px] font-700 num text-emphasis">8.0</div>
           <div className="text-[12px] text-muted-foreground">Strong and highly attractive for senior SAP leaders</div>
         </div>
-        <KPITile label="Salary Competitiveness" value="GBP 180-220k" delta="Large performance bonus (40-60%)" icon={<DollarSign className="h-4 w-4"/>} emphasis />
+        <KPITile label="Salary Competitiveness" value="RM 18-22k" delta="Large performance bonus (40-60%)" icon={<DollarSign className="h-4 w-4"/>} emphasis />
         <KPITile label="Market Reach" value="High" delta="15+ years required" icon={<Globe className="h-4 w-4"/>}/>
       </div>
 
@@ -93,7 +93,7 @@ function Page() {
               <CheckCircle2 className="h-4 w-4 text-success mt-0.5" />
               <div className="flex-1">
                 <div className="text-[12px] font-500">Competitive base salary</div>
-                <div className="text-[11px] text-muted-foreground">GBP 180k-220k plus large bonus</div>
+                <div className="text-[11px] text-muted-foreground">RM 18k-22k plus large bonus</div>
               </div>
             </div>
             <div className="flex items-start gap-2">

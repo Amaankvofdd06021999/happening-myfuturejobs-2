@@ -7,6 +7,7 @@ import { Search, MapPin, Sliders, Sparkles, Bookmark, ArrowUpDown, BookmarkCheck
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { JobDetailModal } from "@/components/JobDetailModal";
 
 export const Route = createFileRoute("/jobseeker/jobs")({
   head: () => ({ meta: [{ title: "Find jobs — MYFutureJobs" }] }),
@@ -23,6 +24,8 @@ function Page() {
   const [savedJobs, setSavedJobs] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<"match" | "date">("match");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedJob, setSelectedJob] = useState<typeof jobs[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const jobsPerPage = 5;
 
   const allJobs = [...jobs, ...jobs.map((j) => ({ ...j, id: j.id + "x", match: j.match - 7 }))];
@@ -81,6 +84,11 @@ function Page() {
     toast.success("Application started", {
       description: `Applying to ${jobTitle} at ${company}`,
     });
+  };
+
+  const handleViewJob = (job: typeof jobs[0]) => {
+    setSelectedJob(job);
+    setIsModalOpen(true);
   };
 
   const toggleFilter = (filterSet: string[], setFilter: (v: string[]) => void, value: string) => {
@@ -274,7 +282,7 @@ function Page() {
                       <div className="flex gap-2">
                         <motion.button
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => toast.info("Opening job details", { description: j.title })}
+                          onClick={() => handleViewJob(j)}
                           className="inline-flex h-9 items-center rounded-[8px] border border-border bg-card px-3 text-[12px] font-600 hover:border-primary transition-colors"
                         >
                           View
@@ -333,6 +341,16 @@ function Page() {
           )}
         </div>
       </div>
+
+      {/* Job Detail Modal */}
+      {selectedJob && (
+        <JobDetailModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          job={selectedJob}
+          onApply={() => handleApply(selectedJob.title, selectedJob.company)}
+        />
+      )}
     </AppShell>
   );
 }

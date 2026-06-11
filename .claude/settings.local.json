@@ -17,7 +17,12 @@
       "Bash(npm install --legacy-peer-deps)",
       "Bash(git commit -m \"Fix deployment with legacy peer deps and compatible versions\n\n- Added .npmrc with legacy-peer-deps=true for deployment\n- Reverted @lovable.dev/vite-tanstack-config to ^2.1.1\n- Added nitro ^3.0.260603-beta back to match requirements\n- This combination should resolve all peer dependency conflicts\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
       "Bash(git commit -m \"Fix 404 errors in deployment with proper routing configuration\n\n- Added vercel.json with rewrites to handle client-side routing\n- Added public/_redirects file for additional deployment compatibility\n- Configured all routes to redirect to index.html for SPA routing\n- Added cache headers for static assets\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix dynamic import module error for Vercel deployment\n\n- Added vercel.json with proper rewrites for SPA routing\n- Updated vite.config.ts with production build optimizations\n- Disabled manual chunks to fix dynamic imports\n- Added optimizeDeps for core React dependencies\n- Configured proper cache headers for static assets\n\nThis fixes the \"Failed to fetch dynamically imported module\" error\nby ensuring proper routing and build configuration for Vercel.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(curl -I http://localhost:5173/)",
+      "Bash(findstr LISTENING)",
+      "Bash(findstr \"127.0.0.1\\|0.0.0.0\")",
+      "Bash(findstr \":[0-9]\")"
     ],
     "deny": [],
     "ask": []

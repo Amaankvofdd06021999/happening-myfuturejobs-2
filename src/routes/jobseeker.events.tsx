@@ -3,10 +3,12 @@ import { AppShell } from "@/components/AppShell";
 import { jobseekerNav } from "@/lib/nav";
 import { jobseekerUser } from "@/lib/mock";
 import { Badge, SectionTitle } from "@/components/ui-bits";
-import { Calendar, MapPin, Ticket, Bus, Award } from "lucide-react";
+import { Calendar, MapPin, Ticket, Bus, Award, Search, Filter } from "lucide-react";
 import eventCarnival from "@/assets/event-carnival.jpg";
 import eventTraining from "@/assets/event-training.jpg";
 import teamHero from "@/assets/team-hero.jpg";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/jobseeker/events")({
   head: () => ({ meta: [{ title: "Events & Training — MYFutureJobs" }] }),
@@ -14,25 +16,93 @@ export const Route = createFileRoute("/jobseeker/events")({
 });
 
 function Page() {
-  const events = [
-    { img: eventCarnival, tag: "Career Carnival", t: "MYFutureJobs Carnival KL 2026", d: "12–14 Mar · KLCC", spots: "Walk-in interviews" },
-    { img: eventTraining, tag: "Training", t: "Industrial Automation Bootcamp", d: "Starts 1 Apr · Penang", spots: "20 seats · HRDC" },
-    { img: teamHero, tag: "Hiring Event", t: "Tech Hiring Day Cyberjaya", d: "28 Feb · Cyberjaya", spots: "30+ employers" },
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedType, setSelectedType] = useState<string[]>([]);
+
+  const allEvents = [
+    { img: eventCarnival, tag: "Career Carnival", t: "MYFutureJobs Carnival KL 2026", d: "12–14 Mar · KLCC", spots: "Walk-in interviews", location: "KLCC" },
+    { img: eventTraining, tag: "Training", t: "Industrial Automation Bootcamp", d: "Starts 1 Apr · Penang", spots: "20 seats · HRDC", location: "Penang" },
+    { img: teamHero, tag: "Hiring Event", t: "Tech Hiring Day Cyberjaya", d: "28 Feb · Cyberjaya", spots: "30+ employers", location: "Cyberjaya" },
+    { img: eventCarnival, tag: "Training", t: "Digital Marketing Masterclass", d: "5 Mar · Online", spots: "50 seats · MDEC", location: "Online" },
+    { img: teamHero, tag: "Career Carnival", t: "Finance & Banking Career Fair", d: "20 Mar · Putrajaya", spots: "25+ employers", location: "Putrajaya" },
+    { img: eventTraining, tag: "Hiring Event", t: "Healthcare Professionals Recruitment", d: "15 Mar · Shah Alam", spots: "15+ hospitals", location: "Shah Alam" },
   ];
+
+  const eventTypes = ["Career Carnival", "Training", "Hiring Event"];
+
+  const filteredEvents = useMemo(() => {
+    return allEvents.filter(event => {
+      const matchesSearch = event.t.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           event.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           event.tag.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesType = selectedType.length === 0 || selectedType.includes(event.tag);
+      return matchesSearch && matchesType;
+    });
+  }, [searchQuery, selectedType, allEvents]);
+
+  const events = filteredEvents.slice(0, 3);
   return (
     <AppShell nav={jobseekerNav} user={jobseekerUser}>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-[28px] font-700 tracking-tight">Events & Training</h1>
-          <p className="mt-1 text-sm text-muted-foreground">RSVP, attend, and claim transport rewards for verified interviews.</p>
+          <p className="mt-1 text-sm text-muted-foreground">RSVP, attend, and claim transport rewards for verified interviews. {filteredEvents.length} events found</p>
         </div>
         <Badge tone="ai"><Award className="h-3 w-3"/> 3 rewards available</Badge>
       </div>
 
+      {/* Search and Filter Section */}
+      <div className="mb-6 space-y-3">
+        <div className="flex gap-3 flex-wrap">
+          <label className="flex items-center gap-2 rounded-[10px] border border-border bg-card px-3 flex-1 min-w-[250px]">
+            <Search className="h-4 w-4 text-muted-foreground"/>
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search events, locations, or types..."
+              className="h-11 w-full bg-transparent text-sm outline-none"
+            />
+          </label>
+          <div className="flex items-center gap-2">
+            <Filter className="h-4 w-4 text-muted-foreground"/>
+            {eventTypes.map(type => (
+              <button
+                key={type}
+                onClick={() => setSelectedType(prev =>
+                  prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
+                )}
+                className={`h-11 px-4 rounded-[10px] text-[12px] font-600 transition-colors ${
+                  selectedType.includes(type)
+                    ? 'bg-primary text-primary-foreground'
+                    : 'border border-border bg-card hover:border-primary'
+                }`}
+              >
+                {type}
+              </button>
+            ))}
+            {selectedType.length > 0 && (
+              <button
+                onClick={() => setSelectedType([])}
+                className="h-11 px-3 rounded-[10px] border border-border bg-card text-[12px] font-600 hover:border-error hover:text-error transition-colors"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
       <SectionTitle title="Upcoming for you" />
       <div className="grid gap-4 md:grid-cols-3">
-        {events.map((e) => (
-          <article key={e.t} className="overflow-hidden rounded-[14px] border border-border bg-card shadow-card">
+        <AnimatePresence mode="popLayout">
+          {events.map((e, index) => (
+            <motion.article
+              key={e.t}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ delay: index * 0.1 }}
+              className="overflow-hidden rounded-[14px] border border-border bg-card shadow-card hover:shadow-hero hover:border-primary transition-all">
             <img src={e.img} alt="" className="aspect-[16/10] w-full object-cover" loading="lazy" />
             <div className="p-5">
               <Badge tone="primary">{e.tag}</Badge>
@@ -43,8 +113,9 @@ function Page() {
               </div>
               <button className="mt-4 inline-flex h-9 items-center rounded-[10px] bg-primary px-4 text-[12px] font-600 text-primary-foreground">RSVP</button>
             </div>
-          </article>
+          </motion.article>
         ))}
+        </AnimatePresence>
       </div>
 
       <div className="mt-10">

@@ -7,6 +7,7 @@ import { Plus, Sparkles, Edit2, Copy, Archive, MoreVertical, Filter, ArrowUpDown
 import { toast } from "sonner";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { VacancyCreateModal } from "@/components/VacancyCreateModal";
 
 export const Route = createFileRoute("/employer/vacancies")({
   head: () => ({ meta: [{ title: "Vacancies — MYFutureJobs" }] }),
@@ -36,6 +37,8 @@ function Page() {
   const [sortBy, setSortBy] = useState<"applicants" | "score" | "date">("applicants");
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"create" | "generate" | "analyze">("create");
 
   const handleEdit = (vacancy: Vacancy) => {
     toast.info("Opening editor", {
@@ -95,13 +98,38 @@ function Page() {
             <h1 className="text-[28px] font-700 tracking-tight">Vacancies</h1>
             <p className="mt-1 text-sm text-muted-foreground">{sortedVacancies.length} vacancies · Verified employer</p>
           </div>
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => toast.success("Creating vacancy", { description: "Opening vacancy builder" })}
-            className="inline-flex h-10 items-center gap-1.5 rounded-[10px] bg-primary px-4 text-sm font-600 text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            <Plus className="h-4 w-4"/> New vacancy
-          </motion.button>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setModalMode("generate");
+                setModalOpen(true);
+              }}
+              className="inline-flex h-10 items-center gap-1.5 rounded-[10px] border border-border bg-card px-4 text-sm font-600 hover:border-primary transition-colors"
+            >
+              <Sparkles className="h-4 w-4"/> Generate by AI
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setModalMode("analyze");
+                setModalOpen(true);
+              }}
+              className="inline-flex h-10 items-center gap-1.5 rounded-[10px] grad-orange px-4 text-sm font-600 text-white hover:opacity-90 transition-opacity"
+            >
+              <Sparkles className="h-4 w-4"/> Analyze JD
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setModalMode("create");
+                setModalOpen(true);
+              }}
+              className="inline-flex h-10 items-center gap-1.5 rounded-[10px] bg-primary px-4 text-sm font-600 text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <Plus className="h-4 w-4"/> New vacancy
+            </motion.button>
+          </div>
         </div>
 
         <div className="flex items-center gap-3 flex-wrap">
@@ -257,6 +285,13 @@ function Page() {
           </tbody>
         </table>
       </div>
+
+      {/* Vacancy Create/Generate/Analyze Modal */}
+      <VacancyCreateModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        mode={modalMode}
+      />
     </AppShell>
   );
 }

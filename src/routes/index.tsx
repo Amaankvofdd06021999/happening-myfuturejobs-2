@@ -966,14 +966,14 @@ function Home() {
                 </button>
                 <button
                   onClick={() => handleAppDownload("Android")}
-                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-white px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-gray-50 transition-colors"
+                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-card px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-inset transition-colors"
                 >
                   <Smartphone className="h-4 w-4" />
                   Android
                 </button>
                 <button
                   onClick={() => handleAppDownload("Huawei AppGallery")}
-                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-white px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-gray-50 transition-colors"
+                  className="inline-flex h-11 items-center gap-2 rounded-[8px] border border-border bg-card px-5 text-[14px] font-600 text-foreground hover:border-primary hover:bg-inset transition-colors"
                 >
                   <Smartphone className="h-4 w-4" />
                   Huawei

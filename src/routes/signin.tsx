@@ -110,10 +110,7 @@ function SignIn() {
       <div className="relative hidden overflow-hidden bg-surface lg:block">
         <img src={teamHero} alt="" className="absolute inset-0 h-full w-full object-cover opacity-80" />
         <div className="absolute inset-0 grad-blue opacity-25" />
-        <div className="relative flex h-full flex-col justify-between p-12">
-          <div className="inline-flex items-center gap-2 self-start rounded-full bg-white/90 px-3 py-1.5 text-[12px] font-600 text-foreground backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-emphasis" /> AI is on-prem & anonymised
-          </div>
+        <div className="relative flex h-full flex-col justify-end p-12">
           <div className="rounded-[14px] bg-white/95 p-6 backdrop-blur shadow-hero">
             <div className="text-[12px] font-600 uppercase tracking-wider text-emphasis">Featured story</div>
             <blockquote className="mt-2 text-[18px] font-600 leading-snug text-foreground">

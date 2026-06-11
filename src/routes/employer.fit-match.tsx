@@ -8,6 +8,7 @@ import { Badge, SectionTitle } from "@/components/ui-bits";
 import { Sparkles, ArrowRight, X, Check, Users, Filter, Calendar, MessageSquare, FileText, Download, Star, Brain, Target, TrendingUp, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { InterviewCalendar } from "@/components/InterviewCalendar";
 
 export const Route = createFileRoute("/employer/fit-match")({
   head: () => ({ meta: [{ title: "Fit-Match — MYFutureJobs" }] }),
@@ -21,6 +22,8 @@ function Page() {
   const [compareMode, setCompareMode] = useState(false);
   const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
   const [filterMinScore, setFilterMinScore] = useState(0);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectedCandidateForInterview, setSelectedCandidateForInterview] = useState<string>("");
   const dims = [
     { name: "Leadership", v: 72 },
     { name: "Cultural Fit", v: 80 },
@@ -49,9 +52,8 @@ function Page() {
   };
 
   const handleScheduleInterview = (candidateName: string) => {
-    toast.success("Opening scheduler", {
-      description: `Scheduling interview with ${candidateName}`,
-    });
+    setSelectedCandidateForInterview(candidateName);
+    setCalendarOpen(true);
   };
 
   const toggleCompareSelection = (candidateId: string) => {
@@ -376,6 +378,23 @@ function Page() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Add button to open calendar view */}
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setCalendarOpen(true)}
+        className="fixed bottom-6 right-6 inline-flex items-center gap-2 h-12 px-5 rounded-[12px] bg-primary text-primary-foreground shadow-hero hover:opacity-90 transition-opacity z-30"
+      >
+        <Calendar className="h-5 w-5" />
+        <span className="font-600">View Interview Calendar</span>
+      </motion.button>
+
+      {/* Interview Calendar Modal */}
+      <InterviewCalendar
+        isOpen={calendarOpen}
+        onClose={() => setCalendarOpen(false)}
+        candidateName={selectedCandidateForInterview}
+      />
     </AppShell>
   );
 }

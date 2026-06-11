@@ -136,24 +136,24 @@ function Page() {
                     <td className="px-3 py-2.5">
                       <div className="flex items-center gap-2">
                         <Badge tone={c.tone}>{c.st}</Badge>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+                        <div className="flex gap-1">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               toast.success("Sending message", { description: `Opening chat with ${c.n}` });
                             }}
-                            className="p-1 hover:bg-primary-soft rounded"
+                            className="p-1 hover:bg-primary-soft rounded transition-all"
                           >
-                            <MessageSquare className="h-3 w-3 text-primary" />
+                            <MessageSquare className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
                           </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               toast.info("Setting reminder", { description: `Reminder set for ${c.n}` });
                             }}
-                            className="p-1 hover:bg-warning-soft rounded"
+                            className="p-1 hover:bg-warning-soft rounded transition-all"
                           >
-                            <Bell className="h-3 w-3 text-warning" />
+                            <Bell className="h-3 w-3 text-muted-foreground group-hover:text-warning transition-colors" />
                           </button>
                         </div>
                       </div>
@@ -186,24 +186,24 @@ function Page() {
                   <div className="font-600 group-hover:text-primary transition-colors">{e.c}</div>
                   <div className="text-[12px] text-muted-foreground">{e.w}</div>
                 </div>
-                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex gap-1">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      toast.success("Report generated", { description: `Downloading compliance report for ${e.c}` });
+                      toast.success("Report generated", { description: `Downloading compliance report` });
                     }}
                     className="p-1.5 hover:bg-background rounded-lg transition-colors"
                   >
-                    <Download className="h-3.5 w-3.5" />
+                    <Download className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      toast.info("Contact initiated", { description: `Opening communication channel with ${e.c}` });
+                      toast.info("Contact initiated", { description: `Opening communication channel` });
                     }}
                     className="p-1.5 hover:bg-background rounded-lg transition-colors"
                   >
-                    <MessageSquare className="h-3.5 w-3.5" />
+                    <MessageSquare className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
                   </button>
                 </div>
               </motion.li>
