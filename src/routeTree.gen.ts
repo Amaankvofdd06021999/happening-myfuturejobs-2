@@ -32,6 +32,7 @@ import { Route as EmployerInterviewRouteImport } from './routes/employer.intervi
 import { Route as EmployerFitMatchRouteImport } from './routes/employer.fit-match'
 import { Route as EmployerCompanyRouteImport } from './routes/employer.company'
 import { Route as EmployerBiasRouteImport } from './routes/employer.bias'
+import { Route as CompanyCompanyIdRouteImport } from './routes/company.$companyId'
 
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
@@ -148,10 +149,16 @@ const EmployerBiasRoute = EmployerBiasRouteImport.update({
   path: '/employer/bias',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompanyCompanyIdRoute = CompanyCompanyIdRouteImport.update({
+  id: '/company/$companyId',
+  path: '/company/$companyId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
   '/employer/company': typeof EmployerCompanyRoute
   '/employer/fit-match': typeof EmployerFitMatchRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
   '/employer/company': typeof EmployerCompanyRoute
   '/employer/fit-match': typeof EmployerFitMatchRoute
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
   '/employer/company': typeof EmployerCompanyRoute
   '/employer/fit-match': typeof EmployerFitMatchRoute
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/signin'
+    | '/company/$companyId'
     | '/employer/bias'
     | '/employer/company'
     | '/employer/fit-match'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/signin'
+    | '/company/$companyId'
     | '/employer/bias'
     | '/employer/company'
     | '/employer/fit-match'
@@ -280,6 +291,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/signin'
+    | '/company/$companyId'
     | '/employer/bias'
     | '/employer/company'
     | '/employer/fit-match'
@@ -306,6 +318,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SigninRoute: typeof SigninRoute
+  CompanyCompanyIdRoute: typeof CompanyCompanyIdRoute
   EmployerBiasRoute: typeof EmployerBiasRoute
   EmployerCompanyRoute: typeof EmployerCompanyRoute
   EmployerFitMatchRoute: typeof EmployerFitMatchRoute
@@ -492,12 +505,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmployerBiasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/company/$companyId': {
+      id: '/company/$companyId'
+      path: '/company/$companyId'
+      fullPath: '/company/$companyId'
+      preLoaderRoute: typeof CompanyCompanyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SigninRoute: SigninRoute,
+  CompanyCompanyIdRoute: CompanyCompanyIdRoute,
   EmployerBiasRoute: EmployerBiasRoute,
   EmployerCompanyRoute: EmployerCompanyRoute,
   EmployerFitMatchRoute: EmployerFitMatchRoute,

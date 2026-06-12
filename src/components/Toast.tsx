@@ -37,10 +37,10 @@ function Toast({
   }, [notification.duration, onClose]);
 
   const icons = {
-    success: <CheckCircle2 className="h-5 w-5 text-green-500" />,
-    error: <AlertCircle className="h-5 w-5 text-red-500" />,
-    info: <Info className="h-5 w-5 text-blue-500" />,
-    warning: <AlertCircle className="h-5 w-5 text-yellow-500" />
+    success: <CheckCircle2 className="h-5 w-5 text-green-500 dark:text-green-400" />,
+    error: <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400" />,
+    info: <Info className="h-5 w-5 text-blue-500 dark:text-blue-400" />,
+    warning: <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400" />
   };
 
   const bgColors = {

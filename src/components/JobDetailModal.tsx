@@ -1,9 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui-bits";
+import { Link } from "@tanstack/react-router";
 import {
   X, MapPin, Calendar, DollarSign, Briefcase, Users, Clock,
   Sparkles, Brain, Target, ChevronRight, Building, CheckCircle2,
-  AlertCircle, TrendingUp, Award, BookOpen
+  AlertCircle, TrendingUp, Award, BookOpen, ExternalLink
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -79,7 +80,17 @@ export function JobDetailModal({ isOpen, onClose, job, onApply }: JobDetailModal
                 </div>
                 <div>
                   <h2 className="text-[20px] font-700">{job.title}</h2>
-                  <p className="text-[14px] text-muted-foreground mt-1">{job.company}</p>
+                  <div className="mt-1">
+                    <Link
+                      to="/company/$companyId"
+                      params={{ companyId: job.company.toLowerCase().replace(/\s+/g, '-') }}
+                      className="text-[14px] text-muted-foreground hover:text-primary hover:underline transition-colors inline-flex items-center gap-1"
+                      onClick={onClose}
+                    >
+                      {job.company}
+                      <ExternalLink className="h-3.5 w-3.5"/>
+                    </Link>
+                  </div>
                   <div className="flex flex-wrap gap-3 mt-3 text-[12px] text-muted-foreground">
                     <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5"/> {job.loc}</span>
                     <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5"/> {job.type}</span>

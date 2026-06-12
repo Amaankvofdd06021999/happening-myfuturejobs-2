@@ -238,9 +238,9 @@
   --muted: #18181b;
   --muted-foreground: #9ca3af;
   --border: #27272a;
-  --primary: #2838a0;
+  --primary: #5a8fff;
   --primary-foreground: #ffffff;
-  --primary-soft: rgba(40, 56, 160, 0.15);
+  --primary-soft: rgba(90, 143, 255, 0.15);
   --emphasis: #ff6838;
   --emphasis-foreground: #ffffff;
   --emphasis-soft: rgba(255, 104, 56, 0.15);
@@ -313,11 +313,20 @@
 
   /* Better hover states */
   [data-theme="dark"] .hover\:border-primary:hover {
-    border-color: #5a9fff;
+    border-color: #6ba3ff;
   }
 
   [data-theme="dark"] .hover\:bg-card:hover {
     background-color: #202024;
+  }
+
+  /* Better text contrast for links and interactive elements */
+  [data-theme="dark"] .hover\:text-primary:hover {
+    color: #6ba3ff;
+  }
+
+  [data-theme="dark"] .text-primary {
+    color: #5a8fff;
   }
 
   /* Improve input contrast */

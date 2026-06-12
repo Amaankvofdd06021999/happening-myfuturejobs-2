@@ -1,30 +1,40 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
-import { employerNav } from "@/lib/nav";
-import { employerUser } from "@/lib/mock";
-import { Badge, SectionTitle, KPITile } from "@/components/ui-bits";
+import { jobseekerNav } from "@/lib/nav";
+import { jobseekerUser } from "@/lib/mock";
+import { Badge, SectionTitle } from "@/components/ui-bits";
 import {
-  Building2, ShieldCheck, MapPin, Globe, Star, TrendingUp,
+  ShieldCheck, MapPin, Globe, Star, TrendingUp,
   Users, Briefcase, Award, Calendar, Clock, DollarSign,
-  Heart, Coffee, Home, Laptop, GraduationCap, Sparkles,
-  ChevronRight, ExternalLink, Mail, Phone, MessageSquare,
-  Target, BarChart3, UserCheck, FileText, Zap, CheckCircle2
+  Heart, Coffee, Home, Laptop, GraduationCap,
+  ExternalLink, MessageSquare,
+  Target, BarChart3, UserCheck, FileText, Zap, CheckCircle2,
+  ArrowLeft
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useState } from "react";
 
-export const Route = createFileRoute("/employer/company")({
-  head: () => ({ meta: [{ title: "Company profile — MYFutureJobs" }] }),
+export const Route = createFileRoute("/company/$companyId")({
+  head: () => ({ meta: [{ title: "Company Profile — MYFutureJobs" }] }),
   component: Page,
 });
 
 function Page() {
+  const { companyId } = Route.useParams();
   const [activeTab, setActiveTab] = useState<"overview" | "culture" | "jobs">("overview");
+  const [isFollowing, setIsFollowing] = useState(false);
 
-  const handleContactAction = (action: string) => {
-    toast.success(`${action} initiated`, {
-      description: "We'll get back to you within 24 hours"
+  const handleFollow = () => {
+    setIsFollowing(!isFollowing);
+    toast.success(isFollowing ? "Unfollowed company" : "Following company", {
+      description: isFollowing ? "You will no longer receive updates" : "You'll receive updates about new jobs"
+    });
+  };
+
+  const handleMessage = () => {
+    toast.success("Message sent", {
+      description: "The company will respond within 2-3 business days"
     });
   };
 
@@ -52,8 +62,23 @@ function Page() {
     { rating: 5, name: "Priya K.", role: "Product Manager", text: "Innovative projects and truly diverse workplace." }
   ];
 
+  const openJobs = [
+    { id: 1, title: "Senior Data Scientist", dept: "Analytics", location: "KLCC", salary: "RM 12-18k", applicants: 45 },
+    { id: 2, title: "Cloud Solutions Architect", dept: "Infrastructure", location: "KLCC", salary: "RM 15-20k", applicants: 32 },
+    { id: 3, title: "Product Manager", dept: "Product", location: "Hybrid", salary: "RM 10-15k", applicants: 67 },
+    { id: 4, title: "Full Stack Developer", dept: "Engineering", location: "KLCC", salary: "RM 8-12k", applicants: 89 },
+  ];
+
   return (
-    <AppShell nav={employerNav} user={employerUser}>
+    <AppShell nav={jobseekerNav} user={jobseekerUser}>
+      {/* Back to Jobs Link */}
+      <Link
+        to="/jobseeker/jobs"
+        className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-primary mb-4"
+      >
+        <ArrowLeft className="h-4 w-4"/> Back to Jobs
+      </Link>
+
       {/* Enhanced Header Section */}
       <div className="overflow-hidden rounded-[16px] bg-gradient-to-br from-primary via-primary-dark to-emphasis shadow-hero">
         <div className="relative p-8">
@@ -74,13 +99,13 @@ function Page() {
               </p>
 
               <div className="mt-4 flex flex-wrap gap-3">
-                <Badge tone="success" className="bg-white/20 backdrop-blur text-white border-white/30">
+                <Badge className="bg-white/20 backdrop-blur text-white border-white/30">
                   <ShieldCheck className="h-3.5 w-3.5"/> Verified Platinum Employer
                 </Badge>
-                <Badge tone="default" className="bg-white/20 backdrop-blur text-white border-white/30">
+                <Badge className="bg-white/20 backdrop-blur text-white border-white/30">
                   <Star className="h-3.5 w-3.5"/> 4.6 Rating (248 reviews)
                 </Badge>
-                <Badge tone="ai" className="bg-white/20 backdrop-blur text-white border-white/30">
+                <Badge className="bg-white/20 backdrop-blur text-white border-white/30">
                   <Award className="h-3.5 w-3.5"/> Best Workplace 2024
                 </Badge>
               </div>
@@ -104,17 +129,22 @@ function Page() {
             <div className="flex flex-col gap-2">
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => toast.info("Opening company profile editor")}
+                onClick={handleMessage}
                 className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-white px-4 text-sm font-600 text-primary hover:bg-white/90"
               >
-                <FileText className="h-4 w-4"/> Edit Profile
+                <MessageSquare className="h-4 w-4"/> Message Company
               </motion.button>
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => toast.info("Opening analytics dashboard")}
-                className="inline-flex h-10 items-center gap-2 rounded-[10px] border border-white/30 bg-white/10 backdrop-blur px-4 text-sm font-600 text-white hover:bg-white/20"
+                onClick={handleFollow}
+                className={`inline-flex h-10 items-center gap-2 rounded-[10px] px-4 text-sm font-600 transition-all ${
+                  isFollowing
+                    ? "bg-white text-primary hover:bg-white/90"
+                    : "border border-white/30 bg-white/10 backdrop-blur text-white hover:bg-white/20"
+                }`}
               >
-                <BarChart3 className="h-4 w-4"/> View Analytics
+                <Users className="h-4 w-4"/>
+                {isFollowing ? "Following" : "Follow Company"}
               </motion.button>
             </div>
           </div>
@@ -214,29 +244,29 @@ function Page() {
               </div>
             </div>
 
-            {/* Hiring Insights */}
+            {/* Why Work Here */}
             <div className="space-y-4">
               <div className="rounded-[12px] border border-border bg-card p-5 shadow-card">
                 <div className="flex items-center gap-2 mb-4">
                   <Zap className="h-5 w-5 text-primary"/>
-                  <h3 className="text-[15px] font-600">Hiring Insights</h3>
+                  <h3 className="text-[15px] font-600">Why Work Here?</h3>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] text-muted-foreground">Avg. Time to Hire</span>
-                    <span className="text-[13px] font-600">11 days</span>
+                  <div className="text-[13px]">
+                    <div className="font-600 text-primary mb-1">Innovation First</div>
+                    <p className="text-[12px] text-muted-foreground">Work on cutting-edge AI and cloud projects</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] text-muted-foreground">Applications/Month</span>
-                    <span className="text-[13px] font-600">2,847</span>
+                  <div className="text-[13px]">
+                    <div className="font-600 text-primary mb-1">Career Growth</div>
+                    <p className="text-[12px] text-muted-foreground">Clear progression paths and mentorship</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] text-muted-foreground">Interview Success</span>
-                    <span className="text-[13px] font-600">32%</span>
+                  <div className="text-[13px]">
+                    <div className="font-600 text-primary mb-1">Work-Life Balance</div>
+                    <p className="text-[12px] text-muted-foreground">Flexible hours and hybrid options</p>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] text-muted-foreground">Offer Accept Rate</span>
-                    <span className="text-[13px] font-600">89%</span>
+                  <div className="text-[13px]">
+                    <div className="font-600 text-primary mb-1">Global Impact</div>
+                    <p className="text-[12px] text-muted-foreground">Shape the future of sustainable energy</p>
                   </div>
                 </div>
               </div>
@@ -248,7 +278,7 @@ function Page() {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { label: "Careers Page", url: "petronas.com/careers" },
+                    { label: "Company Website", url: "petronas.com" },
                     { label: "LinkedIn", url: "linkedin.com/company/petronas" },
                     { label: "Glassdoor Reviews", url: "glassdoor.com/petronas" }
                   ].map((link) => (
@@ -337,9 +367,37 @@ function Page() {
               <SectionTitle title="Open Positions"/>
               <Badge tone="primary">{companyStats.activeJobs} active jobs</Badge>
             </div>
-            <div className="text-center py-12 text-[14px] text-muted-foreground">
-              <Briefcase className="h-12 w-12 mx-auto mb-3 text-muted-foreground/50"/>
-              View and manage job postings in the Vacancies section
+            <div className="space-y-3">
+              {openJobs.map((job) => (
+                <Link
+                  key={job.id}
+                  to="/jobseeker/jobs"
+                  className="block p-4 rounded-[10px] border border-border hover:border-primary hover:shadow-card transition-all group"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="text-[14px] font-600 group-hover:text-primary transition-colors">
+                        {job.title}
+                      </h4>
+                      <div className="mt-1 flex flex-wrap gap-3 text-[12px] text-muted-foreground">
+                        <span>{job.dept}</span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3"/> {job.location}
+                        </span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1">
+                          <DollarSign className="h-3 w-3"/> {job.salary}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-[11px] text-muted-foreground">{job.applicants} applicants</div>
+                      <div className="mt-1 text-[11px] font-600 text-primary">Apply →</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         )}

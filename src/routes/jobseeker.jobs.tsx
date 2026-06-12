@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { jobseekerNav } from "@/lib/nav";
 import { jobseekerUser, jobs } from "@/lib/mock";
@@ -261,7 +261,16 @@ function Page() {
                         </motion.button>
                       </div>
                     </div>
-                    <div className="text-[13px] text-muted-foreground">{j.company} · {j.loc}</div>
+                    <div className="text-[13px] text-muted-foreground">
+                      <Link
+                        to="/company/$companyId"
+                        params={{ companyId: j.company.toLowerCase().replace(/\s+/g, '-') }}
+                        className="hover:text-primary hover:underline transition-colors"
+                      >
+                        {j.company}
+                      </Link>
+                      {' '}· {j.loc}
+                    </div>
                     <div className="mt-3 flex flex-wrap gap-2 text-[12px]">
                       <Badge tone="default">{j.type}</Badge>
                       <Badge tone="default">{j.pay}</Badge>
