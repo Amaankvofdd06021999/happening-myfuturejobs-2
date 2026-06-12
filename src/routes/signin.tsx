@@ -89,12 +89,12 @@ function SignIn() {
                 <span className="h-px flex-1 bg-border" /> or continue with <span className="h-px flex-1 bg-border" />
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <button type="button" className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
+              <div className={`grid gap-2 ${role === "jobseeker" ? "grid-cols-1" : "grid-cols-2"}`}>
+                <button type="button" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
                   <KeyRound className="h-4 w-4" /> MyDigital ID
                 </button>
                 {role !== "jobseeker" && (
-                  <button type="button" className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
+                  <button type="button" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] border border-border bg-card text-sm font-600 hover:bg-inset">
                     <ShieldCheck className="h-4 w-4" /> PERKESO SSO
                   </button>
                 )}
