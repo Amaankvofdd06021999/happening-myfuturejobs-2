@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui-bits";
 import { Link } from "@tanstack/react-router";
+import { MapView } from "./MapView";
 import {
   X, MapPin, Calendar, DollarSign, Briefcase, Users, Clock,
   Sparkles, Brain, Target, ChevronRight, Building, CheckCircle2,
@@ -238,6 +239,26 @@ export function JobDetailModal({ isOpen, onClose, job, onApply }: JobDetailModal
                         <span>Manage marketing budget and ensure ROI targets are met</span>
                       </li>
                     </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Location Map */}
+              <div>
+                <h3 className="text-[16px] font-600 mb-3">Office Location</h3>
+                <MapView
+                  location={job.loc}
+                  companyName={job.company}
+                  className="h-[250px]"
+                />
+                <div className="mt-3 grid grid-cols-2 gap-3 text-[12px]">
+                  <div className="rounded-[8px] border border-border bg-inset p-2">
+                    <p className="text-muted-foreground">Commute Options</p>
+                    <p className="font-600 mt-0.5">MRT, Bus, Car Parking</p>
+                  </div>
+                  <div className="rounded-[8px] border border-border bg-inset p-2">
+                    <p className="text-muted-foreground">Nearby Amenities</p>
+                    <p className="font-600 mt-0.5">Food Courts, Gym, Banks</p>
                   </div>
                 </div>
               </div>

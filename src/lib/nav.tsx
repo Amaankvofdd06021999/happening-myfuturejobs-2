@@ -1,4 +1,4 @@
-import { LayoutDashboard, Briefcase, Sparkles, FileText, User, Calendar, Award, Trophy } from "lucide-react";
+import { LayoutDashboard, Briefcase, Sparkles, FileText, User, Calendar, Award, Trophy, Users, TrendingUp } from "lucide-react";
 import type { NavItem } from "@/components/AppShell";
 
 export const jobseekerNav: NavItem[] = [
@@ -6,9 +6,11 @@ export const jobseekerNav: NavItem[] = [
   { to: "/jobseeker/jobs", label: "Find jobs", icon: <Briefcase className="h-4 w-4" /> },
   { to: "/jobseeker/applications", label: "Applications", icon: <FileText className="h-4 w-4" /> },
   { to: "/jobseeker/career-signal", label: "Career Signal", icon: <Sparkles className="h-4 w-4" /> },
+  { to: "/career-pathway", label: "Career Pathway", icon: <TrendingUp className="h-4 w-4" /> },
   { to: "/jobseeker/cv-positioning", label: "CV Positioning", icon: <Award className="h-4 w-4" /> },
   { to: "/jobseeker/cv-edits", label: "CV Edits", icon: <FileText className="h-4 w-4" /> },
   { to: "/jobseeker/events", label: "Events & Training", icon: <Calendar className="h-4 w-4" /> },
+  { to: "/community", label: "Community", icon: <Users className="h-4 w-4" /> },
   { to: "/jobseeker/rewards", label: "Rewards", icon: <Trophy className="h-4 w-4" /> },
   { to: "/jobseeker/profile", label: "My Profile", icon: <User className="h-4 w-4" /> },
 ];
@@ -28,5 +30,6 @@ export const officerNav: NavItem[] = [
   { to: "/officer/cases", label: "Jobseeker cases", icon: <User className="h-4 w-4" /> },
   { to: "/officer/employers", label: "Employer oversight", icon: <Briefcase className="h-4 w-4" /> },
   { to: "/officer/research", label: "Research Hub", icon: <Sparkles className="h-4 w-4" /> },
+  { to: "/community", label: "Community", icon: <Users className="h-4 w-4" /> },
   { to: "/officer/reports", label: "Reports", icon: <FileText className="h-4 w-4" /> },
 ];

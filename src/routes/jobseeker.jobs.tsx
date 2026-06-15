@@ -3,11 +3,12 @@ import { AppShell } from "@/components/AppShell";
 import { jobseekerNav } from "@/lib/nav";
 import { jobseekerUser, jobs } from "@/lib/mock";
 import { Badge } from "@/components/ui-bits";
-import { Search, MapPin, Sliders, Sparkles, Bookmark, ArrowUpDown, BookmarkCheck } from "lucide-react";
+import { Search, MapPin, Sliders, Sparkles, Bookmark, ArrowUpDown, BookmarkCheck, Map, List } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { JobDetailModal } from "@/components/JobDetailModal";
+import { MapView } from "@/components/MapView";
 
 export const Route = createFileRoute("/jobseeker/jobs")({
   head: () => ({ meta: [{ title: "Find jobs — MYFutureJobs" }] }),
@@ -26,6 +27,7 @@ function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedJob, setSelectedJob] = useState<typeof jobs[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
   const jobsPerPage = 5;
 
   const allJobs = [...jobs, ...jobs.map((j) => ({ ...j, id: j.id + "x", match: j.match - 7 }))];
@@ -116,6 +118,27 @@ function Page() {
           <p className="mt-1 text-sm text-muted-foreground">{filteredJobs.length} matches · sorted by {sortBy === "match" ? "AI fit" : "date posted"}</p>
         </div>
         <div className="flex items-center gap-2">
+          {/* View Mode Toggle */}
+          <div className="inline-flex items-center rounded-[10px] border border-border bg-card p-1">
+            <button
+              onClick={() => setViewMode("list")}
+              className={`inline-flex items-center gap-2 h-7 px-3 rounded-[8px] text-[12px] font-600 transition-all ${
+                viewMode === "list" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <List className="h-3 w-3" />
+              List
+            </button>
+            <button
+              onClick={() => setViewMode("map")}
+              className={`inline-flex items-center gap-2 h-7 px-3 rounded-[8px] text-[12px] font-600 transition-all ${
+                viewMode === "map" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Map className="h-3 w-3" />
+              Map
+            </button>
+          </div>
           <button
             onClick={() => setSortBy(sortBy === "match" ? "date" : "match")}
             className="inline-flex items-center gap-2 h-9 px-4 rounded-[10px] border border-border bg-card text-[12px] font-600 hover:border-primary transition-colors"
@@ -230,8 +253,10 @@ function Page() {
         </aside>
 
         <div className="space-y-3">
-          <AnimatePresence mode="popLayout">
-            {paginatedJobs.map((j, index) => (
+          {viewMode === "list" ? (
+            <>
+              <AnimatePresence mode="popLayout">
+                {paginatedJobs.map((j, index) => (
               <motion.article
                 key={j.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -309,7 +334,70 @@ function Page() {
                 </div>
               </motion.article>
             ))}
-          </AnimatePresence>
+              </AnimatePresence>
+            </>
+          ) : (
+            /* Map View */
+            <div className="space-y-4">
+              {/* Main Map */}
+              <div className="rounded-[12px] border border-border bg-card shadow-card overflow-hidden">
+                <MapView
+                  location={searchLocation || "Kuala Lumpur"}
+                  className="h-[500px] w-full"
+                />
+
+                {/* Job Markers Info */}
+                <div className="p-4 border-t border-border bg-card">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-600">
+                      {filteredJobs.length} jobs in {searchLocation || "this area"}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        <div className="h-3 w-3 rounded-full bg-primary"></div>
+                        <span className="text-xs text-muted-foreground">Your location</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="h-3 w-3 rounded-full bg-orange-500"></div>
+                        <span className="text-xs text-muted-foreground">Job locations</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Job Cards for Map View */}
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                {paginatedJobs.map((j) => (
+                  <motion.div
+                    key={j.id}
+                    whileHover={{ scale: 1.02 }}
+                    className="rounded-[10px] border border-border bg-card p-4 shadow-card cursor-pointer hover:border-primary transition-all"
+                    onClick={() => handleViewJob(j)}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-[8px] bg-inset text-sm">
+                        {j.logo}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-600 truncate">{j.title}</h4>
+                        <p className="text-xs text-muted-foreground truncate">{j.company}</p>
+                        <div className="mt-2 flex items-center gap-2">
+                          <Badge tone="default">
+                            <MapPin className="h-3 w-3" />
+                            {j.loc}
+                          </Badge>
+                          <Badge tone="ai">
+                            {j.match}%
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Pagination */}
           {totalPages > 1 && (

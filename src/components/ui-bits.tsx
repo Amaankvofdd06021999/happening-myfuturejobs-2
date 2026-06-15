@@ -106,3 +106,17 @@ export function SectionTitle({ title, kicker, action }: { title: string; kicker?
     </div>
   );
 }
+
+export function Card({
+  children,
+  className = ""
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`rounded-[10px] border border-border bg-card shadow-card ${className}`}>
+      {children}
+    </div>
+  );
+}

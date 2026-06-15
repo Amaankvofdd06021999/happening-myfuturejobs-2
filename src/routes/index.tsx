@@ -4,8 +4,10 @@ import { toast } from "sonner";
 import { Search, MapPin, Sparkles, Briefcase, Building2, GraduationCap, Calendar, Award, ArrowRight, CheckCircle2, BarChart3, Users, ShieldCheck, Brain, Zap, Globe, TrendingUp, FileText, Play, Lock, Rocket, Target, ChevronRight, BookOpen, Layers, LineChart, UserCheck, MessageSquare, Settings, Database, Shield, Smartphone, Cloud, Mail, Phone, MapPinned, Facebook, Twitter, Linkedin, Instagram, Youtube, ExternalLink, Clock, Star, UserCircle } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { FloatingChatbot } from "@/components/FloatingChatbot";
 import { AccessibilityWidget } from "@/components/AccessibilityWidget";
+import { useTranslation } from "@/lib/i18n";
 import { Badge } from "@/components/ui-bits";
 import teamHero from "@/assets/team-hero.jpg";
 import heroImage from "../../Heroimage.png";
@@ -30,6 +32,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [jobSearch, setJobSearch] = useState("");
   const [locationSearch, setLocationSearch] = useState("");
   const [language, setLanguage] = useState("English");
@@ -166,20 +169,21 @@ function Home() {
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-6 px-4 lg:px-8">
           <Logo />
           <nav className="ml-6 hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-            <a href="#jobs" onClick={(e) => handleNavClick(e, "jobs")} className="hover:text-foreground cursor-pointer transition-colors">Find jobs</a>
-            <a href="#employers" onClick={(e) => handleNavClick(e, "employers")} className="hover:text-foreground cursor-pointer transition-colors">Employers</a>
-            <a href="#events" onClick={(e) => handleNavClick(e, "events")} className="hover:text-foreground cursor-pointer transition-colors">Events</a>
+            <a href="#jobs" onClick={(e) => handleNavClick(e, "jobs")} className="hover:text-foreground cursor-pointer transition-colors">{t("nav.findJobs")}</a>
+            <a href="#employers" onClick={(e) => handleNavClick(e, "employers")} className="hover:text-foreground cursor-pointer transition-colors">{t("landing.forEmployers")}</a>
+            <a href="#events" onClick={(e) => handleNavClick(e, "events")} className="hover:text-foreground cursor-pointer transition-colors">{t("nav.events")}</a>
             <a href="#ai-features" onClick={(e) => handleNavClick(e, "ai-features")} className="hover:text-foreground cursor-pointer transition-colors">AI Features</a>
             <a href="#success" onClick={(e) => handleNavClick(e, "success")} className="hover:text-foreground cursor-pointer transition-colors">Success Stories</a>
             <a href="#resources" onClick={(e) => handleNavClick(e, "resources")} className="hover:text-foreground cursor-pointer transition-colors">Resources</a>
           </nav>
           <div className="ml-auto flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Link to="/signin" className="hidden h-10 items-center rounded-[10px] px-4 text-sm font-600 text-foreground hover:bg-inset sm:inline-flex">
-              Sign in
+              {t("auth.signIn")}
             </Link>
             <Link to="/signin" className="inline-flex h-10 items-center rounded-[10px] grad-orange px-4 text-sm font-600 text-white hover:opacity-90">
-              Create account
+              {t("auth.signUp")}
             </Link>
           </div>
         </div>
@@ -194,10 +198,10 @@ function Home() {
               National employment portal · Powered by PERKESO
             </div>
             <h1 className="scroll-animate fade-in-up delay-100 text-[44px] font-700 leading-[1.05] tracking-tight lg:text-[60px]">
-              Find work that <span className="text-emphasis">fits you</span>, not just any job.
+              {t("landing.title")}
             </h1>
             <p className="scroll-animate fade-in-up delay-200 mt-5 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">
-              Smart matching, AI career coaching, verified employers, and pathways into training — all in one place.
+              {t("landing.subtitle")}
             </p>
 
             {/* ENHANCED SEARCH WITH AI */}
@@ -206,7 +210,7 @@ function Home() {
                 <label className="relative flex items-center gap-2 rounded-[10px] bg-inset px-3">
                   <Search className="h-4 w-4 text-muted-foreground" />
                   <input
-                    placeholder="Job title, skill or company"
+                    placeholder={t("landing.searchPlaceholder")}
                     className="h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                     value={jobSearch}
                     onChange={(e) => setJobSearch(e.target.value)}
@@ -217,7 +221,7 @@ function Home() {
                 <label className="flex items-center gap-2 rounded-[10px] bg-inset px-3">
                   <MapPin className="h-4 w-4 text-muted-foreground" />
                   <input
-                    placeholder="Kuala Lumpur, Selangor…"
+                    placeholder={t("landing.locationPlaceholder")}
                     className="h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                     value={locationSearch}
                     onChange={(e) => setLocationSearch(e.target.value)}
@@ -228,7 +232,7 @@ function Home() {
                   onClick={handleJobSearch}
                   className="h-12 rounded-[10px] grad-orange px-6 text-sm font-600 text-white hover:opacity-90 transition-opacity"
                 >
-                  Find jobs
+                  {t("landing.searchButton")}
                 </button>
               </div>
               <div className="flex flex-wrap items-center gap-2 px-2 py-2 text-[12px] text-muted-foreground">

@@ -2,7 +2,9 @@ import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { type ReactNode, useState, useRef, useEffect } from "react";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { FloatingChatbot } from "./FloatingChatbot";
+import { useTranslation } from "@/lib/i18n";
 import { Bell, Search, User, Settings, HelpCircle, LogOut, ChevronUp, Menu, X } from "lucide-react";
 
 export type NavItem = { to: string; label: string; icon: ReactNode };
@@ -20,6 +22,7 @@ export function AppShell({
 }) {
   const { location } = useRouterState();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -153,12 +156,13 @@ export function AppShell({
             />
           </div>
 
-          {/* Notifications and Theme Toggle - visible on all sizes */}
+          {/* Notifications, Language Switcher and Theme Toggle - visible on all sizes */}
           <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <button aria-label="Notifications" className="relative inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-border bg-card hover:bg-inset">
               <Bell className="h-4 w-4" />
               <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-emphasis" />
             </button>
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </header>
@@ -247,9 +251,15 @@ export function AppShell({
           </div>
         )}
 
-        <div className="flex min-h-0 flex-1">
-          <main className="min-w-0 flex-1 overflow-x-hidden p-4 lg:p-8">{children}</main>
-          {rightPanel && <div className="hidden xl:block">{rightPanel}</div>}
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="flex min-h-0 flex-1">
+            <main className="min-w-0 flex-1 overflow-x-hidden p-4 lg:p-8">{children}</main>
+            {rightPanel && <div className="hidden xl:block">{rightPanel}</div>}
+          </div>
+          {/* Powered by 360° footer - hidden on mobile due to bottom nav */}
+          <div className="hidden lg:flex items-center justify-center py-2 text-xs text-muted-foreground border-t border-border">
+            {t("common.poweredBy")}
+          </div>
         </div>
       </div>
 

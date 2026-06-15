@@ -10,10 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
+import { Route as MobileAppRouteImport } from './routes/mobile-app'
+import { Route as CareerPathwayRouteImport } from './routes/career-pathway'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OfficerIndexRouteImport } from './routes/officer.index'
 import { Route as JobseekerIndexRouteImport } from './routes/jobseeker.index'
 import { Route as EmployerIndexRouteImport } from './routes/employer.index'
+import { Route as CommunityIndexRouteImport } from './routes/community/index'
 import { Route as OfficerResearchRouteImport } from './routes/officer.research'
 import { Route as OfficerReportsRouteImport } from './routes/officer.reports'
 import { Route as OfficerEmployersRouteImport } from './routes/officer.employers'
@@ -39,6 +42,16 @@ const SigninRoute = SigninRouteImport.update({
   path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MobileAppRoute = MobileAppRouteImport.update({
+  id: '/mobile-app',
+  path: '/mobile-app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareerPathwayRoute = CareerPathwayRouteImport.update({
+  id: '/career-pathway',
+  path: '/career-pathway',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -57,6 +70,11 @@ const JobseekerIndexRoute = JobseekerIndexRouteImport.update({
 const EmployerIndexRoute = EmployerIndexRouteImport.update({
   id: '/employer/',
   path: '/employer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityIndexRoute = CommunityIndexRouteImport.update({
+  id: '/community/',
+  path: '/community/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfficerResearchRoute = OfficerResearchRouteImport.update({
@@ -157,6 +175,8 @@ const CompanyCompanyIdRoute = CompanyCompanyIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/career-pathway': typeof CareerPathwayRoute
+  '/mobile-app': typeof MobileAppRoute
   '/signin': typeof SigninRoute
   '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
@@ -177,12 +197,15 @@ export interface FileRoutesByFullPath {
   '/officer/employers': typeof OfficerEmployersRoute
   '/officer/reports': typeof OfficerReportsRoute
   '/officer/research': typeof OfficerResearchRoute
+  '/community/': typeof CommunityIndexRoute
   '/employer/': typeof EmployerIndexRoute
   '/jobseeker/': typeof JobseekerIndexRoute
   '/officer/': typeof OfficerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/career-pathway': typeof CareerPathwayRoute
+  '/mobile-app': typeof MobileAppRoute
   '/signin': typeof SigninRoute
   '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
@@ -203,6 +226,7 @@ export interface FileRoutesByTo {
   '/officer/employers': typeof OfficerEmployersRoute
   '/officer/reports': typeof OfficerReportsRoute
   '/officer/research': typeof OfficerResearchRoute
+  '/community': typeof CommunityIndexRoute
   '/employer': typeof EmployerIndexRoute
   '/jobseeker': typeof JobseekerIndexRoute
   '/officer': typeof OfficerIndexRoute
@@ -210,6 +234,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/career-pathway': typeof CareerPathwayRoute
+  '/mobile-app': typeof MobileAppRoute
   '/signin': typeof SigninRoute
   '/company/$companyId': typeof CompanyCompanyIdRoute
   '/employer/bias': typeof EmployerBiasRoute
@@ -230,6 +256,7 @@ export interface FileRoutesById {
   '/officer/employers': typeof OfficerEmployersRoute
   '/officer/reports': typeof OfficerReportsRoute
   '/officer/research': typeof OfficerResearchRoute
+  '/community/': typeof CommunityIndexRoute
   '/employer/': typeof EmployerIndexRoute
   '/jobseeker/': typeof JobseekerIndexRoute
   '/officer/': typeof OfficerIndexRoute
@@ -238,6 +265,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/career-pathway'
+    | '/mobile-app'
     | '/signin'
     | '/company/$companyId'
     | '/employer/bias'
@@ -258,12 +287,15 @@ export interface FileRouteTypes {
     | '/officer/employers'
     | '/officer/reports'
     | '/officer/research'
+    | '/community/'
     | '/employer/'
     | '/jobseeker/'
     | '/officer/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/career-pathway'
+    | '/mobile-app'
     | '/signin'
     | '/company/$companyId'
     | '/employer/bias'
@@ -284,12 +316,15 @@ export interface FileRouteTypes {
     | '/officer/employers'
     | '/officer/reports'
     | '/officer/research'
+    | '/community'
     | '/employer'
     | '/jobseeker'
     | '/officer'
   id:
     | '__root__'
     | '/'
+    | '/career-pathway'
+    | '/mobile-app'
     | '/signin'
     | '/company/$companyId'
     | '/employer/bias'
@@ -310,6 +345,7 @@ export interface FileRouteTypes {
     | '/officer/employers'
     | '/officer/reports'
     | '/officer/research'
+    | '/community/'
     | '/employer/'
     | '/jobseeker/'
     | '/officer/'
@@ -317,6 +353,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CareerPathwayRoute: typeof CareerPathwayRoute
+  MobileAppRoute: typeof MobileAppRoute
   SigninRoute: typeof SigninRoute
   CompanyCompanyIdRoute: typeof CompanyCompanyIdRoute
   EmployerBiasRoute: typeof EmployerBiasRoute
@@ -337,6 +375,7 @@ export interface RootRouteChildren {
   OfficerEmployersRoute: typeof OfficerEmployersRoute
   OfficerReportsRoute: typeof OfficerReportsRoute
   OfficerResearchRoute: typeof OfficerResearchRoute
+  CommunityIndexRoute: typeof CommunityIndexRoute
   EmployerIndexRoute: typeof EmployerIndexRoute
   JobseekerIndexRoute: typeof JobseekerIndexRoute
   OfficerIndexRoute: typeof OfficerIndexRoute
@@ -349,6 +388,20 @@ declare module '@tanstack/react-router' {
       path: '/signin'
       fullPath: '/signin'
       preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mobile-app': {
+      id: '/mobile-app'
+      path: '/mobile-app'
+      fullPath: '/mobile-app'
+      preLoaderRoute: typeof MobileAppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/career-pathway': {
+      id: '/career-pathway'
+      path: '/career-pathway'
+      fullPath: '/career-pathway'
+      preLoaderRoute: typeof CareerPathwayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -377,6 +430,13 @@ declare module '@tanstack/react-router' {
       path: '/employer'
       fullPath: '/employer/'
       preLoaderRoute: typeof EmployerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community/': {
+      id: '/community/'
+      path: '/community'
+      fullPath: '/community/'
+      preLoaderRoute: typeof CommunityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/officer/research': {
@@ -517,6 +577,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CareerPathwayRoute: CareerPathwayRoute,
+  MobileAppRoute: MobileAppRoute,
   SigninRoute: SigninRoute,
   CompanyCompanyIdRoute: CompanyCompanyIdRoute,
   EmployerBiasRoute: EmployerBiasRoute,
@@ -537,6 +599,7 @@ const rootRouteChildren: RootRouteChildren = {
   OfficerEmployersRoute: OfficerEmployersRoute,
   OfficerReportsRoute: OfficerReportsRoute,
   OfficerResearchRoute: OfficerResearchRoute,
+  CommunityIndexRoute: CommunityIndexRoute,
   EmployerIndexRoute: EmployerIndexRoute,
   JobseekerIndexRoute: JobseekerIndexRoute,
   OfficerIndexRoute: OfficerIndexRoute,

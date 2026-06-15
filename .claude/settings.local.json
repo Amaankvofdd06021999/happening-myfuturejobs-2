@@ -23,7 +23,8 @@
       "Bash(findstr LISTENING)",
       "Bash(findstr \"127.0.0.1\\|0.0.0.0\")",
       "Bash(findstr \":[0-9]\")",
-      "Read(//c/Users/PRISM/Downloads/**)"
+      "Read(//c/Users/PRISM/Downloads/**)",
+      "Bash(git commit -m \"Fix MyDigital ID button alignment on sign-in page\n\n- Changed grid layout to be responsive based on user role\n- Uses grid-cols-1 for jobseekers (single button, centered)\n- Uses grid-cols-2 for employer/officer (two buttons side by side)\n- Added w-full to buttons to ensure proper width in grid cells\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "deny": [],
     "ask": []

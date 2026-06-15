@@ -2,6 +2,8 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslation } from "@/lib/i18n";
 import { ShieldCheck, Briefcase, Building2, ArrowRight, KeyRound } from "lucide-react";
 import teamHero from "@/assets/team-hero.jpg";
 
@@ -14,12 +16,13 @@ type Role = "jobseeker" | "employer" | "officer";
 
 function SignIn() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [role, setRole] = useState<Role>("jobseeker");
 
   const roles: { id: Role; label: string; icon: React.ReactNode; desc: string; to: string }[] = [
-    { id: "jobseeker", label: "Jobseeker", icon: <Briefcase className="h-4 w-4" />, desc: "Find jobs, build your profile, use Career Assistant.", to: "/jobseeker" },
-    { id: "employer", label: "Employer", icon: <Building2 className="h-4 w-4" />, desc: "Post vacancies, screen candidates with Hiring Assistant.", to: "/employer" },
-    { id: "officer", label: "Case Officer", icon: <ShieldCheck className="h-4 w-4" />, desc: "PERKESO staff — LDAP/SSO, RBAC, Research Hub.", to: "/officer" },
+    { id: "jobseeker", label: t("role.jobseeker"), icon: <Briefcase className="h-4 w-4" />, desc: t("role.jobseekerDesc"), to: "/jobseeker" },
+    { id: "employer", label: t("role.employer"), icon: <Building2 className="h-4 w-4" />, desc: t("role.employerDesc"), to: "/employer" },
+    { id: "officer", label: t("role.officer"), icon: <ShieldCheck className="h-4 w-4" />, desc: t("role.officerDesc"), to: "/officer" },
   ];
   const current = roles.find((r) => r.id === role)!;
 
@@ -28,14 +31,17 @@ function SignIn() {
       <div className="flex flex-col bg-background">
         <div className="flex items-center justify-between border-b border-border px-6 py-4 lg:px-10">
           <Logo />
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
         <div className="flex flex-1 items-center justify-center px-6 py-10 lg:px-10">
           <div className="w-full max-w-[420px]">
-            <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">Sign in</div>
-            <h1 className="text-[32px] font-700 leading-tight tracking-tight">Welcome back to MYFutureJobs</h1>
+            <div className="mb-1 text-[12px] font-600 uppercase tracking-wider text-emphasis">{t("auth.signIn")}</div>
+            <h1 className="text-[32px] font-700 leading-tight tracking-tight">{t("auth.welcomeBack")}</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Choose how you're signing in. {role === "officer" && "Internal staff use LDAP."}
+              {t("auth.chooseRole")} {role === "officer" && "Internal staff use LDAP."}
             </p>
 
             {/* role tabs */}
@@ -82,7 +88,7 @@ function SignIn() {
               </div>
 
               <button type="submit" className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-primary text-sm font-600 text-primary-foreground">
-                Sign in as {current.label} <ArrowRight className="h-4 w-4" />
+                {t("auth.signIn")} as {current.label} <ArrowRight className="h-4 w-4" />
               </button>
 
               <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
