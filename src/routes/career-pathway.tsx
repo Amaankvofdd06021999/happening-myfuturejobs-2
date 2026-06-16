@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import {
   Target, TrendingUp, BookOpen, Award, ChevronRight,
   Briefcase, GraduationCap, Star, Clock, MapPin,
-  ArrowRight, CheckCircle2, Info, Lock, Sparkles
+  ArrowRight, CheckCircle2, Info, Lock, Sparkles,
+  BarChart3, Users, FileText, Download, Play,
+  PlusCircle, Brain, Lightbulb, Trophy, Zap,
+  Shield, Coffee, GitBranch, Compass, Flag
 } from "lucide-react";
 import { Card } from "@/components/ui-bits";
 import { AppShell } from "@/components/AppShell";
@@ -369,6 +372,248 @@ function CareerPathway() {
             </Card>
           </div>
         </div>
+
+        {/* Additional Features Section */}
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
+          {/* Career Insights */}
+          <Card className="p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <BarChart3 className="h-5 w-5 text-primary" />
+              <h3 className="font-700">Market Insights</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Demand Growth</span>
+                <span className="text-sm font-600 text-green-500">+23%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Avg. Time to Hire</span>
+                <span className="text-sm font-600">42 days</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Competition Level</span>
+                <span className="text-sm font-600 text-orange-500">Medium</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Remote Opportunities</span>
+                <span className="text-sm font-600">65%</span>
+              </div>
+            </div>
+            <button className="mt-4 w-full rounded-[8px] border border-border bg-inset py-2 text-xs font-600 hover:bg-card">
+              View Full Report
+            </button>
+          </Card>
+
+          {/* Success Stories */}
+          <Card className="p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Trophy className="h-5 w-5 text-primary" />
+              <h3 className="font-700">Success Stories</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="rounded-[8px] bg-inset p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-8 w-8 rounded-full bg-primary-soft text-primary text-xs font-600 flex items-center justify-center">
+                    JL
+                  </div>
+                  <div>
+                    <p className="text-sm font-600">Jane Lee</p>
+                    <p className="text-xs text-muted-foreground">Junior → Senior in 3 years</p>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  "The career pathway helped me identify key skills to focus on..."
+                </p>
+              </div>
+              <div className="rounded-[8px] bg-inset p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-8 w-8 rounded-full bg-primary-soft text-primary text-xs font-600 flex items-center justify-center">
+                    MR
+                  </div>
+                  <div>
+                    <p className="text-sm font-600">Mike Rahman</p>
+                    <p className="text-xs text-muted-foreground">Switched to Tech Lead</p>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  "Clear milestones made my transition smooth..."
+                </p>
+              </div>
+            </div>
+            <button className="mt-4 w-full rounded-[8px] bg-primary py-2 text-xs font-600 text-white hover:opacity-90">
+              Share Your Story
+            </button>
+          </Card>
+
+          {/* Interactive Tools */}
+          <Card className="p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Compass className="h-5 w-5 text-primary" />
+              <h3 className="font-700">Career Tools</h3>
+            </div>
+            <div className="space-y-2">
+              <button className="w-full flex items-center justify-between rounded-[8px] p-3 text-left hover:bg-inset">
+                <div className="flex items-center gap-2">
+                  <Brain className="h-4 w-4 text-primary" />
+                  <span className="text-sm">Skills Assessment</span>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </button>
+              <button className="w-full flex items-center justify-between rounded-[8px] p-3 text-left hover:bg-inset">
+                <div className="flex items-center gap-2">
+                  <GitBranch className="h-4 w-4 text-primary" />
+                  <span className="text-sm">Career Path Simulator</span>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </button>
+              <button className="w-full flex items-center justify-between rounded-[8px] p-3 text-left hover:bg-inset">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-primary" />
+                  <span className="text-sm">CV Builder</span>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </button>
+              <button className="w-full flex items-center justify-between rounded-[8px] p-3 text-left hover:bg-inset">
+                <div className="flex items-center gap-2">
+                  <Download className="h-4 w-4 text-primary" />
+                  <span className="text-sm">Export Career Plan</span>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Learning Resources */}
+        <Card className="mt-6 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-primary" />
+              <h3 className="font-700">Featured Learning Resources</h3>
+            </div>
+            <button className="text-sm text-primary hover:underline">View All</button>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Cloud Architecture Fundamentals",
+                provider: "AWS",
+                duration: "40 hours",
+                level: "Intermediate",
+                rating: 4.8,
+                enrolled: 2341,
+                icon: "☁️"
+              },
+              {
+                title: "Leadership & Team Management",
+                provider: "LinkedIn Learning",
+                duration: "20 hours",
+                level: "Advanced",
+                rating: 4.7,
+                enrolled: 1856,
+                icon: "👥"
+              },
+              {
+                title: "Data Science Bootcamp",
+                provider: "Coursera",
+                duration: "60 hours",
+                level: "Beginner",
+                rating: 4.9,
+                enrolled: 3421,
+                icon: "📊"
+              },
+              {
+                title: "Agile Project Management",
+                provider: "Udemy",
+                duration: "30 hours",
+                level: "Intermediate",
+                rating: 4.6,
+                enrolled: 2107,
+                icon: "🚀"
+              }
+            ].map((course) => (
+              <div key={course.title} className="rounded-[10px] border border-border p-4 hover:border-primary transition-colors">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-2xl">{course.icon}</span>
+                  <span className="rounded-full bg-inset px-2 py-0.5 text-[10px] font-600">
+                    {course.level}
+                  </span>
+                </div>
+                <h4 className="text-sm font-600 mb-1">{course.title}</h4>
+                <p className="text-xs text-muted-foreground mb-3">{course.provider}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-3 w-3 fill-current text-yellow-500" />
+                    <span className="text-xs">{course.rating}</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">{course.duration}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-muted-foreground">{course.enrolled} enrolled</span>
+                  <button className="flex items-center gap-1 text-xs text-primary hover:underline">
+                    <Play className="h-3 w-3" />
+                    Start
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* Career Path Comparison */}
+        <Card className="mt-6 p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <GitBranch className="h-5 w-5 text-primary" />
+            <h3 className="font-700">Compare Career Paths</h3>
+          </div>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-[10px] border border-primary bg-primary/5 p-4">
+              <h4 className="font-600 mb-3">Your Current Path: {selectedRole}</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Time to Senior Level</span>
+                  <span className="font-600">3-5 years</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Avg. Salary Growth</span>
+                  <span className="font-600 text-green-500">+150%</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Job Openings</span>
+                  <span className="font-600">2,456</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Skills Required</span>
+                  <span className="font-600">12 core</span>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-[10px] border border-border p-4">
+              <h4 className="font-600 mb-3">Alternative: Product Manager</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Time to Senior Level</span>
+                  <span className="font-600">4-6 years</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Avg. Salary Growth</span>
+                  <span className="font-600 text-green-500">+180%</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Job Openings</span>
+                  <span className="font-600">1,234</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Skills Required</span>
+                  <span className="font-600">10 core</span>
+                </div>
+              </div>
+              <button className="mt-3 w-full rounded-[8px] border border-primary bg-transparent py-2 text-xs font-600 text-primary hover:bg-primary hover:text-white">
+                Explore This Path
+              </button>
+            </div>
+          </div>
+        </Card>
       </div>
     </AppShell>
   );

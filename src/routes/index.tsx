@@ -649,7 +649,7 @@ function Home() {
                     icon: <Rocket className="h-8 w-8" />,
                     features: ["Tech stack matching", "GitHub integration", "Coding assessments"],
                     talent: "45K+ developers",
-                    bgColor: "from-blue-600/10 to-purple-600/10",
+                    bgColor: "from-blue-600/10 to-blue-700/10",
                     borderColor: "border-blue-500/20"
                   },
                   {
@@ -689,8 +689,8 @@ function Home() {
                     icon: <GraduationCap className="h-8 w-8" />,
                     features: ["MOE requirements", "Academic credentials", "Teaching permits"],
                     talent: "18K+ educators",
-                    bgColor: "from-purple-600/10 to-pink-600/10",
-                    borderColor: "border-purple-500/20"
+                    bgColor: "from-blue-600/10 to-indigo-600/10",
+                    borderColor: "border-blue-500/20"
                   },
                   {
                     industry: "Construction",

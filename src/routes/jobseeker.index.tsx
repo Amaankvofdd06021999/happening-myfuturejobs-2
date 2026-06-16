@@ -1,9 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { jobseekerNav } from "@/lib/nav";
-import { KPITile, ScoreCard, SectionTitle, Badge } from "@/components/ui-bits";
+import { KPITile, ScoreCard, SectionTitle, Badge, Card } from "@/components/ui-bits";
 import { AIPanel } from "@/components/AIPanel";
-import { Briefcase, Eye, Send, CheckCircle2, Sparkles, ArrowRight, GraduationCap, MapPin, TrendingUp, Clock, Calendar, Bell, Award, Target, Users, BookOpen, Heart, BookmarkPlus } from "lucide-react";
+import { Briefcase, Eye, Send, CheckCircle2, Sparkles, ArrowRight, GraduationCap, MapPin, TrendingUp, Clock, Calendar, Bell, Award, Target, Users, BookOpen, Heart, BookmarkPlus, Home, Search, Plus, User, MoreHorizontal, ChevronRight, FileText, Star, Zap } from "lucide-react";
 import eventCarnival from "@/assets/event-carnival.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInUp, staggerContainer, cardHover, scaleIn, progressBar, pulseAnimation, floatingAnimation } from "@/lib/animations";
@@ -37,12 +37,23 @@ function Dashboard() {
   const [profileCompletion, setProfileCompletion] = useState(75);
   const [showAIInsight, setShowAIInsight] = useState(false);
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const [stats, setStats] = useState({
     applications: 12,
     views: 148,
     interviews: 3,
     offers: 1
   });
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Animate career score on mount
   useEffect(() => {
@@ -197,6 +208,310 @@ function Dashboard() {
   const suggestedTraining = mockTrainingPrograms.slice(0, 2);
   const upcomingEvents = mockCareerEvents.filter(e => !e.isRegistered).slice(0, 2);
 
+  // Mobile-optimized view
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-blue-50/50 to-blue-100/50 dark:from-gray-900 dark:to-blue-950/20 pb-20">
+        {/* Mobile Header */}
+        <div className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
+          <div className="px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-muted-foreground">Welcome back</p>
+                <h1 className="text-lg font-700">{user?.name?.split(' ')[0] || 'Ahmad'}</h1>
+              </div>
+              <div className="flex items-center gap-3">
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  className="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center relative"
+                  onClick={() => toast.info("You have 3 new notifications")}
+                >
+                  <Bell className="h-5 w-5" />
+                  <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-red-500 rounded-full border-2 border-white dark:border-gray-900" />
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white"
+                  onClick={() => navigate({ to: '/jobseeker/profile' })}
+                >
+                  <span className="text-sm font-700">
+                    {user?.name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'AR'}
+                  </span>
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-4 py-4 space-y-4">
+          {/* Career Score Card - Mobile */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-gradient-to-r from-primary to-blue-600 dark:from-primary dark:to-blue-500 rounded-3xl p-5 text-white shadow-lg"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm opacity-90">Your Career Signal</p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-700">{careerScore}</span>
+                  <span className="text-sm opacity-90">/ 100</span>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-xs opacity-90 mb-1">Competitive</p>
+                <p className="text-xs">+6 this month</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Zap className="h-4 w-4" />
+                <span className="text-xs">Better than 73% jobseekers</span>
+              </div>
+              <ChevronRight className="h-4 w-4" />
+            </div>
+          </motion.div>
+
+          {/* Quick Stats Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate({ to: '/jobseeker/applications' })}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Send className="h-5 w-5 text-blue-500" />
+                <span className="text-xs text-green-500 font-600">+3 new</span>
+              </div>
+              <div className="text-2xl font-700">{applications.length}</div>
+              <p className="text-xs text-muted-foreground">Applications</p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Eye className="h-5 w-5 text-purple-500" />
+                <span className="text-xs text-green-500 font-600">+22</span>
+              </div>
+              <div className="text-2xl font-700">{stats.views}</div>
+              <p className="text-xs text-muted-foreground">Profile views</p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate({ to: '/jobseeker/applications', search: { status: 'Interview' } })}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Calendar className="h-5 w-5 text-orange-500" />
+                <span className="text-xs text-orange-500 font-600">Upcoming</span>
+              </div>
+              <div className="text-2xl font-700">{upcomingInterviews.length}</div>
+              <p className="text-xs text-muted-foreground">Interviews</p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Award className="h-5 w-5 text-green-500" />
+                <span className="text-xs text-green-500 font-600">Active</span>
+              </div>
+              <div className="text-2xl font-700">1</div>
+              <p className="text-xs text-muted-foreground">Offers</p>
+            </motion.div>
+          </div>
+
+          {/* Quick Actions */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => navigate({ to: '/jobseeker/jobs' })}
+            className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-2xl py-4 flex items-center justify-center gap-2 font-600 shadow-lg"
+          >
+            <Plus className="h-5 w-5" />
+            Find New Jobs
+          </motion.button>
+
+          {/* Application Pipeline - Mobile */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
+            <h3 className="font-700 mb-3">Your Pipeline</h3>
+            <div className="space-y-2">
+              {[
+                { label: 'Applied', count: applications.filter(a => a.status === 'Applied').length, color: 'bg-gray-500' },
+                { label: 'Reviewing', count: applications.filter(a => a.status === 'Reviewing').length, color: 'bg-blue-500' },
+                { label: 'Interview', count: upcomingInterviews.length, color: 'bg-orange-500' },
+                { label: 'Offered', count: applications.filter(a => a.status === 'Offered').length, color: 'bg-green-500' }
+              ].map(stage => (
+                <div key={stage.label} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className={`h-2 w-2 rounded-full ${stage.color}`} />
+                    <span className="text-sm">{stage.label}</span>
+                  </div>
+                  <span className="text-sm font-700">{stage.count}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">Success rate</span>
+                <span className="text-sm font-700">{Math.round((applications.filter(a => a.status === 'Offered').length / applications.length) * 100) || 0}%</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Recommended Jobs - Mobile */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-700">Jobs for you</h3>
+              <Link to="/jobseeker/jobs">
+                <span className="text-sm text-blue-500 font-600">See all</span>
+              </Link>
+            </div>
+            <div className="space-y-3">
+              {recommendedJobs.slice(0, 3).map(job => (
+                <motion.div
+                  key={job.id}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/20 dark:to-blue-800/20 flex items-center justify-center text-lg font-700 text-blue-600 dark:text-blue-400">
+                      {job.company.charAt(0)}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-600 text-sm">{job.title}</h4>
+                      <p className="text-xs text-muted-foreground">{job.company}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <MapPin className="h-3 w-3 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground">{job.location}</span>
+                        <span className="text-xs text-muted-foreground">•</span>
+                        <span className="text-xs text-muted-foreground">{job.type}</span>
+                      </div>
+                    </div>
+                    <Badge tone="ai" className="text-xs">
+                      {job.matchScore}%
+                    </Badge>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    {applications.some(app => app.jobId === job.id) ? (
+                      <button
+                        className="flex-1 rounded-xl border border-green-500 bg-green-50 dark:bg-green-900/20 py-2 text-xs font-600 text-green-600 dark:text-green-400"
+                        disabled
+                      >
+                        <CheckCircle2 className="h-3 w-3 inline mr-1" />
+                        Applied
+                      </button>
+                    ) : (
+                      <>
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleSaveJob(job)}
+                          className="rounded-xl border border-gray-200 dark:border-gray-700 p-2"
+                        >
+                          <Heart className={`h-4 w-4 ${savedJobs.includes(job.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                        </motion.button>
+                        <motion.button
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleQuickApply(job)}
+                          className="flex-1 rounded-xl bg-blue-500 py-2 text-xs font-600 text-white"
+                        >
+                          Quick Apply
+                        </motion.button>
+                      </>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Upcoming Events - Mobile */}
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-700">Upcoming Events</h3>
+              <Link to="/jobseeker/events">
+                <span className="text-sm text-blue-500 font-600">See all</span>
+              </Link>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
+              {upcomingEvents[0] && (
+                <div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center">
+                      <Calendar className="h-5 w-5 text-orange-500" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-600 text-sm">{upcomingEvents[0].title}</h4>
+                      <p className="text-xs text-muted-foreground">{format(new Date(upcomingEvents[0].date), 'MMM d, yyyy')}</p>
+                    </div>
+                  </div>
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleRegisterEvent(upcomingEvents[0])}
+                    className="w-full mt-3 rounded-xl bg-orange-500 py-2 text-xs font-600 text-white"
+                  >
+                    Register Now
+                  </motion.button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Navigation */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800">
+          <div className="grid grid-cols-5 py-2">
+            <button
+              className="flex flex-col items-center gap-1 py-2"
+              onClick={() => navigate({ to: '/jobseeker' })}
+            >
+              <Home className="h-5 w-5 text-blue-500" />
+              <span className="text-[10px] text-blue-500">Home</span>
+            </button>
+            <button
+              className="flex flex-col items-center gap-1 py-2"
+              onClick={() => navigate({ to: '/jobseeker/jobs' })}
+            >
+              <Search className="h-5 w-5 text-gray-400" />
+              <span className="text-[10px] text-gray-400">Jobs</span>
+            </button>
+            <button
+              className="flex flex-col items-center gap-1 py-2"
+              onClick={() => navigate({ to: '/jobseeker/applications' })}
+            >
+              <FileText className="h-5 w-5 text-gray-400" />
+              <span className="text-[10px] text-gray-400">Applied</span>
+            </button>
+            <button
+              className="flex flex-col items-center gap-1 py-2"
+              onClick={() => navigate({ to: '/jobseeker/events' })}
+            >
+              <Calendar className="h-5 w-5 text-gray-400" />
+              <span className="text-[10px] text-gray-400">Events</span>
+            </button>
+            <button
+              className="flex flex-col items-center gap-1 py-2"
+              onClick={() => navigate({ to: '/jobseeker/profile' })}
+            >
+              <User className="h-5 w-5 text-gray-400" />
+              <span className="text-[10px] text-gray-400">Profile</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop view (original layout)
   return (
     <AppShell
       nav={jobseekerNav}
@@ -581,7 +896,7 @@ function Dashboard() {
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
-                  className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-gradient-to-br from-primary-soft to-emphasis-soft text-xl"
+                  className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-gradient-to-br from-primary-soft to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 text-xl"
                 >
                   {job.company.charAt(0)}
                 </motion.div>
@@ -942,7 +1257,7 @@ function Dashboard() {
               <div className="flex gap-3">
                 <motion.div
                   animate={floatingAnimation.animate}
-                  className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-gradient-to-br from-primary-soft to-emphasis-soft"
+                  className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-gradient-to-br from-primary-soft to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20"
                 >
                   <Calendar className="h-5 w-5 text-primary" />
                 </motion.div>

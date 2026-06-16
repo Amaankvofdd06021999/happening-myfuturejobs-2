@@ -30,6 +30,5 @@ export const officerNav: NavItem[] = [
   { to: "/officer/cases", label: "Jobseeker cases", icon: <User className="h-4 w-4" /> },
   { to: "/officer/employers", label: "Employer oversight", icon: <Briefcase className="h-4 w-4" /> },
   { to: "/officer/research", label: "Research Hub", icon: <Sparkles className="h-4 w-4" /> },
-  { to: "/community", label: "Community", icon: <Users className="h-4 w-4" /> },
   { to: "/officer/reports", label: "Reports", icon: <FileText className="h-4 w-4" /> },
 ];

@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import {
   Users, MessageSquare, Calendar, Award, TrendingUp,
   Heart, MessageCircle, Share2, Bookmark, Search,
-  Filter, ChevronRight, Star, UserCheck, Globe
+  Filter, ChevronRight, Star, UserCheck, Globe,
+  Video, Mic, Image, Link, Hash, MapPin,
+  Bell, Settings, MoreVertical, ThumbsUp,
+  Send, PlusCircle, CheckCircle, Clock,
+  Trophy, Target, Zap, Shield, Coffee
 } from "lucide-react";
 import { Card } from "@/components/ui-bits";
 import { AppShell } from "@/components/AppShell";
@@ -33,7 +37,7 @@ function Community() {
     { label: "Active Members", value: "25,432", icon: Users, color: "text-blue-500" },
     { label: "Discussion Groups", value: "156", icon: MessageSquare, color: "text-green-500" },
     { label: "Upcoming Events", value: "42", icon: Calendar, color: "text-orange-500" },
-    { label: "Success Stories", value: "1,289", icon: Award, color: "text-purple-500" },
+    { label: "Success Stories", value: "1,289", icon: Award, color: "text-blue-600" },
   ];
 
   const posts = [
@@ -229,21 +233,103 @@ function Community() {
       {/* Content */}
       <div className="container mx-auto px-4 py-6">
         {activeTab === "feed" && (
-          <div className="mx-auto max-w-2xl space-y-4">
+          <div className="grid gap-6 lg:grid-cols-3">
+            {/* Left Sidebar - User Profile & Quick Stats */}
+            <div className="hidden lg:block space-y-4">
+              <Card className="p-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white font-600">
+                    {userName.substring(0, 2).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="font-600">{userName}</p>
+                    <p className="text-xs text-muted-foreground">{userRoleLabel}</p>
+                  </div>
+                </div>
+                <div className="space-y-2 border-t border-border pt-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Connections</span>
+                    <span className="font-600">487</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Posts</span>
+                    <span className="font-600">23</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Reputation</span>
+                    <span className="font-600 text-primary">Expert</span>
+                  </div>
+                </div>
+                <button className="mt-4 w-full rounded-[8px] border border-border bg-inset py-2 text-xs font-600 hover:bg-card">
+                  View Full Profile
+                </button>
+              </Card>
+
+              <Card className="p-4">
+                <h3 className="font-600 text-sm mb-3">Trending Topics</h3>
+                <div className="space-y-2">
+                  {["#AIJobs", "#RemoteWork", "#TechMalaysia", "#CareerGrowth", "#StartupLife"].map((tag) => (
+                    <button key={tag} className="flex items-center justify-between w-full text-left hover:bg-inset rounded-[6px] p-1.5">
+                      <span className="text-xs text-primary">{tag}</span>
+                      <span className="text-[10px] text-muted-foreground">1.2k posts</span>
+                    </button>
+                  ))}
+                </div>
+              </Card>
+
+              <Card className="p-4 bg-gradient-to-br from-orange-500/10 to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <Trophy className="h-4 w-4 text-orange-500" />
+                  <h3 className="font-600 text-sm">Community Challenge</h3>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3">
+                  Share your success story and win prizes!
+                </p>
+                <button className="w-full rounded-[8px] bg-orange-500 py-2 text-xs font-600 text-white hover:opacity-90">
+                  Join Challenge
+                </button>
+              </Card>
+            </div>
+
+            {/* Main Feed */}
+            <div className="lg:col-span-2 space-y-4">
             {/* Create Post */}
             <Card className="p-4">
               <div className="flex gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary font-600">
-                  U
+                  {userName.substring(0, 1).toUpperCase()}
                 </div>
-                <input
-                  type="text"
-                  placeholder="Share your thoughts, achievements, or questions..."
-                  className="flex-1 rounded-[10px] border border-border bg-inset px-3 py-2 text-sm outline-none focus:border-primary"
-                />
-                <button className="inline-flex h-10 items-center rounded-[10px] bg-primary px-4 text-sm font-600 text-white hover:opacity-90">
-                  Post
-                </button>
+                <div className="flex-1">
+                  <textarea
+                    placeholder="Share your thoughts, achievements, or questions..."
+                    className="w-full rounded-[10px] border border-border bg-inset px-3 py-2 text-sm outline-none focus:border-primary resize-none"
+                    rows={3}
+                  />
+                  <div className="mt-3 flex items-center justify-between">
+                    <div className="flex gap-2">
+                      <button className="inline-flex items-center gap-1 rounded-[6px] px-2 py-1 text-xs text-muted-foreground hover:bg-inset">
+                        <Image className="h-3.5 w-3.5" />
+                        Photo
+                      </button>
+                      <button className="inline-flex items-center gap-1 rounded-[6px] px-2 py-1 text-xs text-muted-foreground hover:bg-inset">
+                        <Video className="h-3.5 w-3.5" />
+                        Video
+                      </button>
+                      <button className="inline-flex items-center gap-1 rounded-[6px] px-2 py-1 text-xs text-muted-foreground hover:bg-inset">
+                        <Link className="h-3.5 w-3.5" />
+                        Link
+                      </button>
+                      <button className="inline-flex items-center gap-1 rounded-[6px] px-2 py-1 text-xs text-muted-foreground hover:bg-inset">
+                        <Hash className="h-3.5 w-3.5" />
+                        Topic
+                      </button>
+                    </div>
+                    <button className="inline-flex items-center gap-2 rounded-[10px] bg-primary px-4 py-2 text-sm font-600 text-white hover:opacity-90">
+                      <Send className="h-3.5 w-3.5" />
+                      Post
+                    </button>
+                  </div>
+                </div>
               </div>
             </Card>
 
@@ -291,6 +377,7 @@ function Community() {
                 </div>
               </Card>
             ))}
+            </div>
           </div>
         )}
 
