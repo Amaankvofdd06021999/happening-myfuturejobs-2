@@ -154,35 +154,33 @@ function Community() {
         avatar: userName.substring(0, 2).toUpperCase(),
       }}
     >
-      <div className="min-h-screen bg-surface">
-        {/* Header */}
-        <div className="border-b border-border bg-card">
-          <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <h1 className="text-2xl font-700">Community Hub</h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Connect, learn, and grow with Malaysia's professional community
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search community..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-10 w-full rounded-[10px] border border-border bg-background pl-10 pr-3 text-sm outline-none focus:border-primary lg:w-[300px]"
-                />
-              </div>
-              <button className="inline-flex h-10 items-center gap-2 rounded-[10px] border border-border bg-card px-4 text-sm font-600 hover:bg-inset">
-                <Filter className="h-4 w-4" />
-                Filter
-              </button>
-            </div>
+      {/* Header */}
+      <div className="border-b border-border bg-card">
+        <div className="container mx-auto px-4 py-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h1 className="text-2xl font-700">Community Hub</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Connect, learn, and grow with Malaysia's professional community
+            </p>
           </div>
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search community..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="h-10 w-full rounded-[10px] border border-border bg-background pl-10 pr-3 text-sm outline-none focus:border-primary lg:w-[300px]"
+              />
+            </div>
+            <button className="inline-flex h-10 items-center gap-2 rounded-[10px] border border-border bg-card px-4 text-sm font-600 hover:bg-inset">
+              <Filter className="h-4 w-4" />
+              Filter
+            </button>
           </div>
+        </div>
         </div>
       </div>
 

@@ -144,23 +144,21 @@ function CareerPathway() {
         avatar: userName.substring(0, 2).toUpperCase(),
       }}
     >
-      <div className="min-h-screen bg-surface">
-        {/* Header */}
-        <div className="border-b border-border bg-card">
-          <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-700">Career Pathway Explorer</h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Visualize your career journey and plan your next steps
-              </p>
-            </div>
-            <button className="inline-flex items-center gap-2 rounded-[10px] bg-primary px-4 py-2 text-sm font-600 text-white hover:opacity-90">
-              <Sparkles className="h-4 w-4" />
-              Get AI Recommendations
-            </button>
+      {/* Header */}
+      <div className="border-b border-border bg-card">
+        <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-700">Career Pathway Explorer</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Visualize your career journey and plan your next steps
+            </p>
           </div>
-          </div>
+          <button className="inline-flex items-center gap-2 rounded-[10px] bg-primary px-4 py-2 text-sm font-600 text-white hover:opacity-90">
+            <Sparkles className="h-4 w-4" />
+            Get AI Recommendations
+          </button>
+        </div>
         </div>
       </div>
 
